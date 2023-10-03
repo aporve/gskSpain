@@ -961,5 +961,36 @@ window.addEventListener('message', function (eventData) {
     }
   }
 
+  if (parsedData?.event_code == 'client-select') {
+    console.log("client-select");
+    let data = localStorage.getItem("updated-data")
+
+    if (data) {
+      console.log("\n\n\n <---  Send data to Bot ---> \n\n\n", parsedData);
+      window.frames.ymIframe.chat.send({
+        event: {
+          code: "client-select",
+          data: "data"
+        }
+      }, true);
+      return;
+    }
+  }
+
+  if (parsedData?.event_code == 'get-client-list') {
+    console.log("get-client-list");
+    let data = localStorage.getItem("updated-data")
+
+    if (data) {
+      console.log("\n\n\n <---  Send data to Bot ---> \n\n\n", parsedData);
+      window.frames.ymIframe.chat.send({
+        event: {
+          code: "get-client-list",
+          data: "data"
+        }
+      }, true);
+      return;
+    }
+  }
 
 }, false);

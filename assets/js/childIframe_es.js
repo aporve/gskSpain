@@ -371,4 +371,18 @@ window.addEventListener('message', function (eventData) {
     }), '*');
   }
 
+  if (parsedEventData.event_code === "client-select") {
+    parent.postMessage(JSON.stringify({
+      event_code: 'client-select',
+      data: parsedEventData.data
+    }), '*');
+  }
+
+  if (parsedEventData.event_code === "get-client-list") {
+    parent.postMessage(JSON.stringify({
+      event_code: 'get-client-list',
+      data: parsedEventData.data
+    }), '*');
+  }
+
 });
