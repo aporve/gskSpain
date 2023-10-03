@@ -989,13 +989,13 @@ window.addEventListener('message', function (eventData) {
   if (parsedData?.event_code == 'client-select') {
     console.log("client-select");
     let data = localStorage.getItem("updated-data")
-
+    console.log('Client-select Data', data)
     if (data) {
       console.log("\n\n\n <---  Send data to Bot ---> \n\n\n", parsedData);
       window.frames.ymIframe.chat.send({
         event: {
           code: "client-select",
-          data: "data"
+          data: data
         }
       }, true);
       return;
