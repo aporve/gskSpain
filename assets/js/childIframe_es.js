@@ -383,6 +383,7 @@ window.addEventListener('message', function (eventData) {
   }
 
   if (parsedEventData.event_code === "client-select") {
+    console.log('Data in childIframe---', parsedEventData.data)
     parent.postMessage(JSON.stringify({
       event_code: 'client-select',
       data: parsedEventData.data

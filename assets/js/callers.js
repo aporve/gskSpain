@@ -228,6 +228,7 @@ function ToBot(eventName, data) {
             }), '*');
             break;
         case "client-select":
+            console.log('client select data from Caller.js--', data)
             window.parent.postMessage(JSON.stringify({
                 event_code: eventName,
                 data: data
