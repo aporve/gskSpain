@@ -83,6 +83,16 @@ window.addEventListener('message', function (eventData) {
     console.log('Event Data---', data);
   }
 
+  if (parsedEventData.event_code === "legal-copyright" && parsedEventData.data) {
+    document.querySelector("iframe").contentWindow.postMessage(JSON.stringify({
+        event_code: 'legal-copyright',                                                // added new event name
+        data: parsedEventData.data
+    }), '*');
+    let eventName = parsedEventData.event_code;
+    let data = parsedEventData.data;
+    console.log("eventName---", eventName);
+    console.log('Event Data---', data);
+}
 
   if (parsedEventData.event_code === "userwelcome-screen" && parsedEventData.data) {
     // remove_blur()

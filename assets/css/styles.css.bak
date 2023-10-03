@@ -440,7 +440,7 @@
 .place_order .btn.continue::after,
 .place_order .btn.confirm::after {
     content: '';
-    background: url("/gskEnv/assets/images/png/next_white.png");
+    background: url("/gskSpain/assets/images/png/next_white.png");
     background-size: cover;
     background-repeat: no-repeat;
     position: absolute;
@@ -464,7 +464,7 @@
 .place_order .btn.back::before,
 .place_order .btn.cancel::before {
     content: '';
-    background: url("/gskEnv/assets/images/png/previous_black.png");
+    background: url("/gskSpain/assets/images/png/previous_black.png");
     background-size: cover;
     background-repeat: no-repeat;
     position: absolute;
