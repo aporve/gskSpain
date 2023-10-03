@@ -11,9 +11,9 @@ function loadOrderCart(data) {
             </div>
             ${getAccordianAccounts(data["new_orders"]["orders"])}
             <div>
-                ${data["rebates_orders"] && data["rebates_orders"]["orders"] && data["rebates_orders"]["orders"].length !== 0 ? `<div class="menu_header"><div class="category_label">${locale["labels"]["rebates"]}</div></div>` : ""}
+                ${data["rebates_orders"] && data["rebates_orders"]["orders"] && data["rebates_orders"]["orders"].length !== 0 ? `<div class="menu_header"><div class="category_label">${locale["labels"]["rebates"]}</div></div>`: ""}
                 <div id="rebates_order">
-                    ${data["rebates_orders"] && data["rebates_orders"]["orders"] && data["rebates_orders"]["orders"].length !== 0 ? getAccordianAccounts([data["rebates_orders"]["orders"][0]], true) : ""}
+                    ${data["rebates_orders"] && data["rebates_orders"]["orders"] && data["rebates_orders"]["orders"].length !== 0 ? getAccordianAccounts([data["rebates_orders"]["orders"][0]], true): ""}
                 </div>
             </div>
         </div>

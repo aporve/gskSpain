@@ -16,23 +16,10 @@
     height: 44px;
 }
 
-.header .header_icon_wrapper .header_bar .icons-grouped {
-    display: flex;
-    align-items: center;
-}
-
 .header .header_icon_wrapper .header_bar .svg_icon_wrapper {
     width: 44px;
     height: 44px;
     cursor: pointer;
-}
-.header .header_icon_wrapper .header_bar .svg_icon_wrapper:first-child {
-    margin-right: 10px;
-    width: 30px;
-    height: 30px;
-}
-.header .header_icon_wrapper .header_bar .svg_icon_wrapper:last-child {
-    margin-left: 10px;
 }
 
 .header .header_icon_wrapper .header_bar .svg_icon_wrapper svg {

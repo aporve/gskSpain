@@ -63,6 +63,7 @@ h6 {
 table, th, td {
     /* border: 0.5px solid #ccc; */
     border-collapse: collapse;
+    overflow: auto;
 }
 
 .bodyContent,

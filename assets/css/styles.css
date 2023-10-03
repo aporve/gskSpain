@@ -156,7 +156,7 @@
 }
 
 .progressbar label.abs {
-    margin-left: -40px;
+   margin-left: -40px;
 }
 
 .main {
@@ -664,8 +664,8 @@ table {
 }
 
 
-.info_data>input {
-    padding: 2px 4px 2px 0px;
+.info_data > input {
+    padding: 2px 4px 2px 0px;;
     text-align: center;
     color: #151515;
     background: #fff;
@@ -675,7 +675,7 @@ table {
     text-align: left;
 }
 
-.info_data.active>input {
+.info_data.active > input {
     padding: 2px 4px;
     text-align: center;
     color: #151515;

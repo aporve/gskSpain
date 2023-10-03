@@ -227,6 +227,18 @@ function ToBot(eventName, data) {
                 data: data
             }), '*');
             break;
+        case "client-select":
+            window.parent.postMessage(JSON.stringify({
+                event_code: eventName,
+                data: data
+            }), '*');
+            break;
+        case "get-client-list":
+            window.parent.postMessage(JSON.stringify({
+                event_code: eventName,
+                data: data
+            }), '*');
+            break;
         default:
             break;
     }
@@ -237,6 +249,11 @@ function ToApp(eventName, data, orgData) {
     switch (eventName) {
         case "user-login":
             userData = data;
+            if(data['rep']) {
+                localStorage.setItem('rep', true);
+            } else {
+                localStorage.removeItem('rep');
+            }
             showHeader(userData);
             break;
         case "welcome-screen":

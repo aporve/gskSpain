@@ -35,8 +35,6 @@ function showSkuLevelDetailsBrand(data, currentSku, requestType, requestSku) {
             <div class="place_order">
                 <button class="btn outline" id="addanotheraccount" data=${encodeURIComponent(JSON.stringify(data))}>${locale["buttons"]["addAnotherAccount"]}</button>
             </div>
-            
-
             <div id="previous-orders-accordion">
             </div>
         </div> 
@@ -56,7 +54,7 @@ function showSkuLevelDetailsBrand(data, currentSku, requestType, requestSku) {
             <div class="swap_account_list"></div>
         </div>
     `);
-
+    
     $("#previous-orders-accordion").empty();
     lastOrder && [lastOrder].map((order) => {
         $("#previous-orders-accordion").append(`
@@ -101,7 +99,7 @@ function showSkuLevelDetailsBrand(data, currentSku, requestType, requestSku) {
     data && data["available_orders"] && data["available_orders"]["orders"] && data["available_orders"]["orders"].map((order, index) => {
         $(".account_list").append(`<div class="item" skudata=${order["sku"]}>${order["account_no"]}</div>`);
     });
-
+    
     /* $("#back").click(function (e) {
         e.preventDefault();
         e.stopPropagation();
@@ -148,21 +146,21 @@ function showSkuLevelDetailsBrand(data, currentSku, requestType, requestSku) {
         getSkuAcc = window.wholesalerAccountData && window.wholesalerAccountData.map((whData, index) => {
             return whData["sku"];
         });
-        if (parseData && parseData?.["new_orders"]?.["orders"] && parseData?.["new_orders"]?.["orders"].length !== 0) {
+        if(parseData && parseData?.["new_orders"]?.["orders"] && parseData?.["new_orders"]?.["orders"].length !== 0) {
             parseData && parseData?.["new_orders"]?.["orders"] && parseData?.["new_orders"]?.["orders"].map((pdo, index) => {
                 window.wholesalerAccountData && window.wholesalerAccountData.map((whData, index) => {
-                    if (!getSkuAcc.includes(pdo["sku"])) {
+                    if(!getSkuAcc.includes(pdo["sku"])) {
                         window.wholesalerAccountData.splice(index, 1);
                     }
 
-                    if (window.counter_input_wrapper) {
+                    if(window.counter_input_wrapper) {
                         let counterListnerId = [...window.counter_input_wrapper];
                         let counterListnerIdArr = counterListnerId && counterListnerId.map((listnerID, index) => {
                             return $(listnerID).attr("inputitem");
                         });
-
+                        
                         whData["product_details"].map((detail, ind) => {
-                            if (counterListnerIdArr.includes(`${whData['sku']}-${detail['sku']}`)) {
+                            if(counterListnerIdArr.includes(`${whData['sku']}-${detail['sku']}`)) {
                                 document.querySelector(`[inputitem="${whData['sku']}-${detail['sku']}"]`);
                                 document.querySelector(`[inputitem="${whData['sku']}-${detail['sku']}"]`).removeEventListener("blur", () => {
                                     console.log("removed");
@@ -175,21 +173,33 @@ function showSkuLevelDetailsBrand(data, currentSku, requestType, requestSku) {
                     }
                 });
             });
-            if (window['counter_input_wrapper']) {
+            if(window['counter_input_wrapper']) {
                 delete window['counter_input_wrapper'];
             }
+            let trimData = window.wholesalerAccountData && window.wholesalerAccountData.filter((whData, index) => {
+                let sum = 0;
+                whData["product_details"].map((detail, ind) => {
+                    sum = sum + Number(detail["units"]);
+                })
+                if(sum != 0) {
+                    return whData;
+                } else {
+                    orderCartData.pop();
+                }
+            });
+            window.wholesalerAccountData = trimData;
             window.dataStore["new_orders"]["orders"] = window.wholesalerAccountData;
         } else {
             console.log("wind --> ", window.wholesalerAccountData);
-            if (window.counter_input_wrapper) {
+            if(window.counter_input_wrapper) {
                 let counterListnerId = [...window.counter_input_wrapper];
                 let counterListnerIdArr = counterListnerId && counterListnerId.map((listnerID, index) => {
                     return $(listnerID).attr("inputitem");
                 });
-
+    
                 window.wholesalerAccountData && window.wholesalerAccountData.map((whData, index) => {
                     whData["product_details"].map((detail, ind) => {
-                        if (counterListnerIdArr.includes(`${whData['sku']}-${detail['sku']}`)) {
+                        if(counterListnerIdArr.includes(`${whData['sku']}-${detail['sku']}`)) {
                             document.querySelectorAll(`[inputitem="${whData['sku']}-${detail['sku']}"]`);
                             document.querySelector(`[inputitem="${whData['sku']}-${detail['sku']}"]`).removeEventListener("blur", () => {
                                 console.log("removed");
@@ -200,7 +210,7 @@ function showSkuLevelDetailsBrand(data, currentSku, requestType, requestSku) {
                         }
                     });
                 });
-
+                
                 delete window['counter_input_wrapper'];
             }
             window.cartData = {};
@@ -218,16 +228,16 @@ function showSkuLevelDetailsBrand(data, currentSku, requestType, requestSku) {
         /* 
         data["new_orders"] = {};
         data["new_orders"]["orders"] = window.wholesalerAccountData; */
-        if (window.counter_input_wrapper) {
+        if(window.counter_input_wrapper) {
             let counterListnerId = [...window.counter_input_wrapper];
             let counterListnerIdArr = counterListnerId && counterListnerId.map((listnerID, index) => {
                 return $(listnerID).attr("inputitem");
             });
-
+    
             window.dataStore["new_orders"] && window.dataStore["new_orders"]["orders"].map((whData, index) => {
                 let quant = whData["product_details"].reduce((accumulator, currentValue) => accumulator + Number(currentValue['units']), 0,);
                 whData["product_details"].map((detail, ind) => {
-                    if (counterListnerIdArr.includes(`${whData['sku']}-${detail['sku']}`)) {
+                    if(counterListnerIdArr.includes(`${whData['sku']}-${detail['sku']}`)) {
                         console.log(document.querySelector(`[inputitem="${whData['sku']}-${detail['sku']}"]`));
                         document.querySelector(`[inputitem="${whData['sku']}-${detail['sku']}"]`).removeEventListener("blur", () => {
                             console.log("removed");
@@ -237,21 +247,21 @@ function showSkuLevelDetailsBrand(data, currentSku, requestType, requestSku) {
                         });
                     }
                 });
-                if (!quant) {
+                if(!quant) {
                     // window.dataStore["new_orders"]["orders"].splice(index, 1);
                 }
             });
             delete window['counter_input_wrapper'];
         }
-
+        
         localStorage.setItem("data", JSON.stringify(window.dataStore));
         let parseData = getParsedData();
         if (parseData && parseData?.["new_orders"]?.["orders"] && parseData?.["new_orders"]?.["orders"].length > 0) {
             let totalSelectedQuantity = 0;
             parseData?.["new_orders"]?.["orders"].map(order => {
                 order["product_details"].map(product => {
-                    if (filteredBrand[0]["sku"] === product["brand"]) {
-                        if (product["quantity"]) {
+                    if(filteredBrand[0]["sku"] === product["brand"]) {
+                        if(product["quantity"]) {
                             totalSelectedQuantity = totalSelectedQuantity + Number(product["quantity"]);
                         }
                     }
@@ -259,25 +269,38 @@ function showSkuLevelDetailsBrand(data, currentSku, requestType, requestSku) {
                 });
             });
             window.dataStore["plan_progress"]["brands"].map(brand => {
-                if (brand["sku"] === currentSku) {
+                if(brand["sku"] === currentSku) {
                     brand["selected"] = totalSelectedQuantity;
                 }
             });
             localStorage.setItem("data", JSON.stringify(window.dataStore));
 
-            if (!window.orderCartData.includes(filteredBrand[0]["sku"])) {
+            if(!window.orderCartData.includes(filteredBrand[0]["sku"])) {
                 window.orderCartData.push(filteredBrand[0]["sku"]);
             }
-
+            
             let isDateSelectedforNewOrder = ""
             parseData?.["new_orders"]?.["orders"].map(nworder => {
-                if (!isDateSelectedforNewOrder || nworder["ordered_date"]) {
+                if(!isDateSelectedforNewOrder || nworder["ordered_date"]) {
                     isDateSelectedforNewOrder = nworder["ordered_date"];
                 } else {
                     isDateSelectedforNewOrder = "";
                 }
             })
-            if (isDateSelectedforNewOrder) {
+            if(isDateSelectedforNewOrder) {
+                let trimData = window.wholesalerAccountData && window.wholesalerAccountData.filter((whData, index) => {
+                    let sum = 0;
+                    whData["product_details"].map((detail, ind) => {
+                        sum = sum + Number(detail["units"]);
+                    })
+                    if(sum != 0) {
+                        return whData;
+                    } else {
+                        orderCartData.pop();
+                    }
+                });
+                window.wholesalerAccountData = trimData;
+                window.dataStore['new_orders']['orders'] = trimData;
                 loadBrandSelectionUI(window.dataStore);
                 let nwData = {
                     ...window.dataStore,
@@ -358,7 +381,7 @@ function showSkuLevelDetailsBrand(data, currentSku, requestType, requestSku) {
 
         let testtemp = [];
         window.wholesalerAccountData && window.wholesalerAccountData.length > 0 && window.wholesalerAccountData.map(whdata => {
-            if (whdata["ordered_date"]) {
+            if(whdata["ordered_date"]) {
                 testtemp.push(new Date(whdata["ordered_date"]).toLocaleDateString("en-GB"));
             }
         });
@@ -366,34 +389,34 @@ function showSkuLevelDetailsBrand(data, currentSku, requestType, requestSku) {
         const getLocalDataForDate = getParsedData();
         const startDate = new Date();
         const endDate = getLocalDataForDate['last_date'];
-        const minDate = `${getMonthName(new Date(startDate))} ${new Date(startDate).getDate()}, ${String(new Date(startDate).getFullYear()).substring(2)}`;
-        const maxDate = `${getMonthName(new Date(endDate))} ${new Date(endDate).getDate()}, ${String(new Date(endDate).getFullYear()).substring(2)}`;
+        const minDate = `${getMonthName( new Date(startDate))} ${new Date(startDate).getDate()}, ${String(new Date(startDate).getFullYear()).substring(2)}`;
+        const maxDate = `${getMonthName( new Date(endDate))} ${new Date(endDate).getDate()}, ${String(new Date(endDate).getFullYear()).substring(2)}`;
         console.log("min Date ", minDate);
         console.log("min Date ", maxDate);
-        Date.prototype.addDays = function (days) {
+        Date.prototype.addDays = function(days) {
             var dat = new Date(this.valueOf())
             dat.setDate(dat.getDate() + days);
             return dat;
         }
-
+     
         function getDates(startDate, stopDate) {
-            var dateArray = new Array();
-            var currentDate = startDate;
-            while (currentDate <= stopDate) {
-                dateArray.push(new Date(currentDate).toLocaleDateString("en-GB"))
-                currentDate = currentDate.addDays(1);
-            }
-            return dateArray;
-        }
-
-        var dateArray = getDates(new Date(minDate), new Date(maxDate));
+           var dateArray = new Array();
+           var currentDate = startDate;
+           while (currentDate <= stopDate) {
+             dateArray.push(new Date(currentDate).toLocaleDateString("en-GB"))
+             currentDate = currentDate.addDays(1);
+           }
+           return dateArray;
+         }
+     
+        var dateArray = getDates(new Date(minDate),  new Date(maxDate));
         console.log(dateArray);
-        console.log(testtemp);
+         console.log(testtemp);
         testtemp.forEach((el, i) => {
-            console.log("i i ", i, " ", el);
+            console.log("i i ", i , " " , el);
             console.log(dateArray);
             console.log(dateArray.includes(el));
-            if (dateArray.includes(el)) {
+            if(dateArray.includes(el)) {
                 var index = dateArray.indexOf(el);
                 console.log(index);
                 if (index !== -1) {
@@ -409,11 +432,11 @@ function showSkuLevelDetailsBrand(data, currentSku, requestType, requestSku) {
         console.log(splitSelected);
         let convertedSelected = new Date(splitSelected[2], splitSelected[1] - 1, splitSelected[0]);
         console.log(convertedSelected)
-        let pickedDate = `${getMonthName(new Date(convertedSelected))} ${new Date(convertedSelected).getDate()}, ${String(new Date(convertedSelected).getFullYear()).substring(2)}`
+        let pickedDate = `${getMonthName( new Date(convertedSelected))} ${new Date(convertedSelected).getDate()}, ${String(new Date(convertedSelected).getFullYear()).substring(2)}`
         console.log("pickedDate -- ", pickedDate);
 
-        window.wholesalerAccountData.push({ ...orderData, "_id": uuid, "brandsku": `${orderData["sku"]}-${filteredBrand[0]["sku"]}`, "ordered_date": pickedDate });
-        addWholeSalerAccordionSku(updatedData, { ...orderData, "_id": uuid, "brandsku": `${orderData["sku"]}-${filteredBrand[0]["sku"]}`, "ordered_date": pickedDate }, currentSku);
+        window.wholesalerAccountData.push({...orderData, "_id": uuid, "brandsku": `${orderData["sku"]}-${filteredBrand[0]["sku"]}`, "ordered_date": pickedDate});
+        addWholeSalerAccordionSku(updatedData, {...orderData, "_id": uuid, "brandsku": `${orderData["sku"]}-${filteredBrand[0]["sku"]}`, "ordered_date": pickedDate}, currentSku);
         // let currentElementData = $(this).attr("skudata");
         // let updatedData = Object.keys(window.dataStore).length !== 0 ? JSON.parse(JSON.stringify(window.dataStore)) : JSON.parse(JSON.stringify(data));
         // let currentAvailableOrders = Object.keys(window.dataStore).length !== 0 ? window.dataStore["available_orders"]["orders"] : data["available_orders"]["orders"];
@@ -460,15 +483,15 @@ function showSkuLevelDetailsBrand(data, currentSku, requestType, requestSku) {
 
     let uuid = create_UUID();
     if (window.wholesalerAccountData && window.wholesalerAccountData.length !== 0) {
-        if (window.cartData && Object.keys(window.cartData).length !== 0) {
+        if(window.cartData && Object.keys(window.cartData).length !== 0) {
             let parseData = Object.keys(window.dataStore).length !== 0 ? JSON.parse(JSON.stringify(window.dataStore)) : getParsedData();
-            if (requestType !== "from-checkout") {
+            if(requestType !== "from-checkout") {
                 parseData && parseData?.["new_orders"] && parseData?.["new_orders"]?.["orders"] && parseData?.["new_orders"]?.["orders"].map((ordr, index) => {
                     window[`shouldNewWholeSalerAccountAdd-${index}`] = true;
                     ordr["product_details"].map(product => {
                         let parentSku = window.cartData[`${ordr["sku"]}_${ordr["_id"]}`];
                         let skuproduct = parentSku?.[product?.["sku"]];
-                        if (window[`shouldNewWholeSalerAccountAdd-${index}`] && skuproduct && (product["brand"] === currentSku)) {
+                        if(window[`shouldNewWholeSalerAccountAdd-${index}`] && skuproduct && (product["brand"] === currentSku)) {
                             addnewOrderBrand(ordr, currentSku, true);
                             window[`shouldNewWholeSalerAccountAdd-${index}`] = false;
                         }
@@ -639,25 +662,26 @@ function showBrandLevelDetails(data, currentSku, requestType, requestSku) {
         e.stopImmediatePropagation();
         let parseData = getParsedData();
         let getSkuAcc = [];
+        let sum = 0;
         console.log("window.counter_input_wrapper -> ", window.counter_input_wrapper)
         getSkuAcc = window.wholesalerAccountData && window.wholesalerAccountData.map((whData, index) => {
             return whData["sku"];
         });
-        if (parseData && parseData?.["new_orders"]?.["orders"] && parseData?.["new_orders"]?.["orders"].length !== 0) {
+        if(parseData && parseData?.["new_orders"]?.["orders"] && parseData?.["new_orders"]?.["orders"].length !== 0) {
             parseData && parseData?.["new_orders"]?.["orders"] && parseData?.["new_orders"]?.["orders"].map((pdo, index) => {
                 window.wholesalerAccountData && window.wholesalerAccountData.map((whData, index) => {
-                    if (!getSkuAcc.includes(pdo["sku"])) {
+                    if(!getSkuAcc.includes(pdo["sku"])) {
                         window.wholesalerAccountData.splice(index, 1);
                     }
 
-                    if (window.counter_input_wrapper) {
+                    if(window.counter_input_wrapper) {
                         let counterListnerId = [...window.counter_input_wrapper];
                         let counterListnerIdArr = counterListnerId && counterListnerId.map((listnerID, index) => {
                             return $(listnerID).attr("inputitem");
                         });
-
+                        
                         whData["product_details"].map((detail, ind) => {
-                            if (counterListnerIdArr.includes(`${whData['sku']}-${detail['sku']}`)) {
+                            if(counterListnerIdArr.includes(`${whData['sku']}-${detail['sku']}`)) {
                                 document.querySelector(`[inputitem="${whData['sku']}-${detail['sku']}"]`);
                                 document.querySelector(`[inputitem="${whData['sku']}-${detail['sku']}"]`).removeEventListener("blur", () => {
                                     console.log("removed");
@@ -673,18 +697,30 @@ function showBrandLevelDetails(data, currentSku, requestType, requestSku) {
             if (window['counter_input_wrapper']) {
                 delete window['counter_input_wrapper'];
             }
+            let trimData = window.wholesalerAccountData && window.wholesalerAccountData.filter((whData, index) => {
+                let sum = 0;
+                whData["product_details"].map((detail, ind) => {
+                    sum = sum + Number(detail["units"]);
+                })
+                if(sum != 0) {
+                    return whData;
+                } else {
+                    orderCartData.pop();
+                }
+            });
+            window.wholesalerAccountData = trimData;
             window.dataStore["new_orders"]["orders"] = window.wholesalerAccountData;
         } else {
             console.log("wind --> ", window.wholesalerAccountData);
-            if (window.counter_input_wrapper) {
+            if(window.counter_input_wrapper) {
                 let counterListnerId = [...window.counter_input_wrapper];
                 let counterListnerIdArr = counterListnerId && counterListnerId.map((listnerID, index) => {
                     return $(listnerID).attr("inputitem");
                 });
-
+    
                 window.wholesalerAccountData && window.wholesalerAccountData.map((whData, index) => {
                     whData["product_details"].map((detail, ind) => {
-                        if (counterListnerIdArr.includes(`${whData['sku']}-${detail['sku']}`)) {
+                        if(counterListnerIdArr.includes(`${whData['sku']}-${detail['sku']}`)) {
                             document.querySelectorAll(`[inputitem="${whData['sku']}-${detail['sku']}"]`);
                             document.querySelector(`[inputitem="${whData['sku']}-${detail['sku']}"]`).removeEventListener("blur", () => {
                                 console.log("removed");
@@ -695,7 +731,7 @@ function showBrandLevelDetails(data, currentSku, requestType, requestSku) {
                         }
                     });
                 });
-
+                
                 delete window['counter_input_wrapper'];
             }
             window.cartData = {};
@@ -713,16 +749,16 @@ function showBrandLevelDetails(data, currentSku, requestType, requestSku) {
         /* 
         data["new_orders"] = {};
         data["new_orders"]["orders"] = window.wholesalerAccountData; */
-        if (window.counter_input_wrapper) {
+        if(window.counter_input_wrapper) {
             let counterListnerId = [...window.counter_input_wrapper];
             let counterListnerIdArr = counterListnerId && counterListnerId.map((listnerID, index) => {
                 return $(listnerID).attr("inputitem");
             });
-
+    
             window.dataStore["new_orders"] && window.dataStore["new_orders"]["orders"].map((whData, index) => {
                 let quant = whData["product_details"].reduce((accumulator, currentValue) => accumulator + Number(currentValue['units']), 0,);
                 whData["product_details"].map((detail, ind) => {
-                    if (counterListnerIdArr.includes(`${whData['sku']}-${detail['sku']}`)) {
+                    if(counterListnerIdArr.includes(`${whData['sku']}-${detail['sku']}`)) {
                         console.log(document.querySelector(`[inputitem="${whData['sku']}-${detail['sku']}"]`));
                         document.querySelector(`[inputitem="${whData['sku']}-${detail['sku']}"]`).removeEventListener("blur", () => {
                             console.log("removed");
@@ -732,29 +768,42 @@ function showBrandLevelDetails(data, currentSku, requestType, requestSku) {
                         });
                     }
                 });
-                if (!quant) {
+                if(!quant) {
                     // window.dataStore["new_orders"]["orders"].splice(index, 1);
                 }
             });
             delete window['counter_input_wrapper'];
         }
-
+        
         localStorage.setItem("data", JSON.stringify(window.dataStore));
         let parseData = getParsedData();
         if (parseData && parseData?.["new_orders"]?.["orders"] && parseData?.["new_orders"]?.["orders"].length > 0) {
-            if (!window.orderCartData.includes(filteredBrand[0]["sku"])) {
+            if(!window.orderCartData.includes(filteredBrand[0]["sku"])) {
                 window.orderCartData.push(filteredBrand[0]["sku"]);
             }
-
+            
             let isDateSelectedforNewOrder = ""
             parseData?.["new_orders"]?.["orders"].map(nworder => {
-                if (!isDateSelectedforNewOrder || nworder["ordered_date"]) {
+                if(!isDateSelectedforNewOrder || nworder["ordered_date"]) {
                     isDateSelectedforNewOrder = nworder["ordered_date"];
                 } else {
                     isDateSelectedforNewOrder = "";
                 }
             })
-            if (isDateSelectedforNewOrder) {
+            if(isDateSelectedforNewOrder) {
+                let trimData = window.wholesalerAccountData && window.wholesalerAccountData.filter((whData, index) => {
+                    let sum = 0;
+                    whData["product_details"].map((detail, ind) => {
+                        sum = sum + Number(detail["units"]);
+                    })
+                    if(sum != 0) {
+                        return whData;
+                    } else {
+                        orderCartData.pop();
+                    }
+                });
+                window.wholesalerAccountData = trimData;
+                window.dataStore['new_orders']['orders'] = trimData;
                 loadBrandSelectionUI(parseData);
                 let nwData = {
                     ...parseData,
@@ -803,7 +852,7 @@ function showBrandLevelDetails(data, currentSku, requestType, requestSku) {
         e.stopPropagation();
         e.stopImmediatePropagation();
         // $(".account_list").empty();
-
+        
         $(".account_select").removeClass("hide");
         /* Disable account addition for now */
         /* let addedAccSkuList = [];
@@ -822,18 +871,18 @@ function showBrandLevelDetails(data, currentSku, requestType, requestSku) {
             } 
         } */
 
-        /*  data && data["available_orders"] && data["available_orders"]["orders"] && data["available_orders"]["orders"].map((order, index) => {
-             if(window.wholesalerAccountData && window.wholesalerAccountData.length !== 0) {
-                 window.wholesalerAccountData.map((whData, index) => {
-                     if(!addedAccSkuList.includes(order["sku"])) {
-                         $(".account_list").append(`<div class="item" skudata=${order["sku"]}>${order["account_no"]}</div>`);
-                     }
-                 });
-             } else {
-                 $(".account_list").append(`<div class="item" skudata=${order["sku"]}>${order["account_no"]}</div>`);
-             }
-         });
-         addlistItemListener(); */
+       /*  data && data["available_orders"] && data["available_orders"]["orders"] && data["available_orders"]["orders"].map((order, index) => {
+            if(window.wholesalerAccountData && window.wholesalerAccountData.length !== 0) {
+                window.wholesalerAccountData.map((whData, index) => {
+                    if(!addedAccSkuList.includes(order["sku"])) {
+                        $(".account_list").append(`<div class="item" skudata=${order["sku"]}>${order["account_no"]}</div>`);
+                    }
+                });
+            } else {
+                $(".account_list").append(`<div class="item" skudata=${order["sku"]}>${order["account_no"]}</div>`);
+            }
+        });
+        addlistItemListener(); */
     });
 
     $(".accordion-item-header.account_detail").click(function (e) {
@@ -867,7 +916,7 @@ function showBrandLevelDetails(data, currentSku, requestType, requestSku) {
 
         let testtemp = [];
         window.wholesalerAccountData && window.wholesalerAccountData.length > 0 && window.wholesalerAccountData.map(whdata => {
-            if (whdata["ordered_date"]) {
+            if(whdata["ordered_date"]) {
                 testtemp.push(new Date(whdata["ordered_date"]).toLocaleDateString("en-GB"));
             }
         });
@@ -875,34 +924,34 @@ function showBrandLevelDetails(data, currentSku, requestType, requestSku) {
         const getLocalDataForDate = getParsedData();
         const startDate = new Date();
         const endDate = getLocalDataForDate['last_date'];
-        const minDate = `${getMonthName(new Date(startDate))} ${new Date(startDate).getDate()}, ${String(new Date(startDate).getFullYear()).substring(2)}`;
-        const maxDate = `${getMonthName(new Date(endDate))} ${new Date(endDate).getDate()}, ${String(new Date(endDate).getFullYear()).substring(2)}`;
+        const minDate = `${getMonthName( new Date(startDate))} ${new Date(startDate).getDate()}, ${String(new Date(startDate).getFullYear()).substring(2)}`;
+        const maxDate = `${getMonthName( new Date(endDate))} ${new Date(endDate).getDate()}, ${String(new Date(endDate).getFullYear()).substring(2)}`;
         console.log("min Date ", minDate);
         console.log("min Date ", maxDate);
-        Date.prototype.addDays = function (days) {
+        Date.prototype.addDays = function(days) {
             var dat = new Date(this.valueOf())
             dat.setDate(dat.getDate() + days);
             return dat;
         }
-
+     
         function getDates(startDate, stopDate) {
-            var dateArray = new Array();
-            var currentDate = startDate;
-            while (currentDate <= stopDate) {
-                dateArray.push(new Date(currentDate).toLocaleDateString("en-GB"))
-                currentDate = currentDate.addDays(1);
-            }
-            return dateArray;
-        }
-
-        var dateArray = getDates(new Date(minDate), new Date(maxDate));
+           var dateArray = new Array();
+           var currentDate = startDate;
+           while (currentDate <= stopDate) {
+             dateArray.push(new Date(currentDate).toLocaleDateString("en-GB"))
+             currentDate = currentDate.addDays(1);
+           }
+           return dateArray;
+         }
+     
+        var dateArray = getDates(new Date(minDate),  new Date(maxDate));
         console.log(dateArray);
-        console.log(testtemp);
+         console.log(testtemp);
         testtemp.forEach((el, i) => {
-            console.log("i i ", i, " ", el);
+            console.log("i i ", i , " " , el);
             console.log(dateArray);
             console.log(dateArray.includes(el));
-            if (dateArray.includes(el)) {
+            if(dateArray.includes(el)) {
                 var index = dateArray.indexOf(el);
                 console.log(index);
                 if (index !== -1) {
@@ -918,10 +967,10 @@ function showBrandLevelDetails(data, currentSku, requestType, requestSku) {
         console.log(splitSelected);
         let convertedSelected = new Date(splitSelected[2], splitSelected[1] - 1, splitSelected[0]);
         console.log(convertedSelected)
-        let pickedDate = `${getMonthName(new Date(convertedSelected))} ${new Date(convertedSelected).getDate()}, ${String(new Date(convertedSelected).getFullYear()).substring(2)}`
+        let pickedDate = `${getMonthName( new Date(convertedSelected))} ${new Date(convertedSelected).getDate()}, ${String(new Date(convertedSelected).getFullYear()).substring(2)}`
         console.log("pickedDate -- ", pickedDate);
-        window.wholesalerAccountData.push({ ...orderData, "_id": uuid, "brandsku": `${orderData["sku"]}-${filteredBrand[0]["sku"]}`, "ordered_date": pickedDate });
-        addWholeSalerAccordion(updatedData, { ...orderData, "_id": uuid, "brandsku": `${orderData["sku"]}-${filteredBrand[0]["sku"]}`, "ordered_date": pickedDate }, currentSku);
+        window.wholesalerAccountData.push({...orderData, "_id": uuid, "brandsku": `${orderData["sku"]}-${filteredBrand[0]["sku"]}`, "ordered_date": pickedDate});
+        addWholeSalerAccordion(updatedData, {...orderData, "_id": uuid, "brandsku": `${orderData["sku"]}-${filteredBrand[0]["sku"]}`, "ordered_date": pickedDate}, currentSku);
         // if (window.wholesalerAccountData && window.wholesalerAccountData.length !== 0) {
         //     let shouldWholeSalerAccountAdd = false;
         //     if(!window.orderCartData.includes(filteredBrand[0]["sku"]) ) {
@@ -1013,15 +1062,15 @@ function showBrandLevelDetails(data, currentSku, requestType, requestSku) {
 
     let uuid = create_UUID();
     if (window.wholesalerAccountData && window.wholesalerAccountData.length !== 0) {
-        if (window.cartData && Object.keys(window.cartData).length !== 0) {
+        if(window.cartData && Object.keys(window.cartData).length !== 0) {
             let parseData = Object.keys(window.dataStore).length !== 0 ? JSON.parse(JSON.stringify(window.dataStore)) : getParsedData();
-            if (requestType !== "from-checkout") {
+            if(requestType !== "from-checkout") {
                 parseData && parseData?.["new_orders"] && parseData?.["new_orders"]?.["orders"] && parseData?.["new_orders"]?.["orders"].map((ordr, index) => {
                     window[`shouldNewWholeSalerAccountAdd-${index}`] = true;
                     ordr["product_details"].map(product => {
                         let parentSku = window.cartData[`${ordr["sku"]}_${ordr["_id"]}`];
                         let skuproduct = parentSku?.[product?.["sku"]];
-                        if (window[`shouldNewWholeSalerAccountAdd-${index}`] && skuproduct && (product["brand"] === currentSku)) {
+                        if(window[`shouldNewWholeSalerAccountAdd-${index}`] && skuproduct && (product["brand"] === currentSku)) {
                             addnewOrder(ordr, currentSku);
                             window[`shouldNewWholeSalerAccountAdd-${index}`] = false;
                         }
@@ -1032,35 +1081,35 @@ function showBrandLevelDetails(data, currentSku, requestType, requestSku) {
             window.wholesalerAccountData = [];
         }
     }
-
+    // debugger;
     /* Disable auto popuplate */
     if (window.wholesalerAccountData && window.wholesalerAccountData.length === 0) {
         let orderData = data["available_orders"]["orders"][0];
-        if (requestType === "swap") {
+        if(requestType === "swap") {
             let requestSkuSwap = data["available_orders"]["orders"].filter(ordr => ordr["sku"] === requestSku);
             orderData = requestSkuSwap[0];
         }
-        if (!window.orderCartData.includes(filteredBrand[0]["sku"])) {
+        if(!window.orderCartData.includes(filteredBrand[0]["sku"])) {
             window.orderCartData.push(filteredBrand[0]["sku"]);
         }
-        window.wholesalerAccountData.push({ ...orderData, "_id": uuid, "brandsku": `${orderData["sku"]}-${filteredBrand[0]["sku"]}`, "ordered_date": `${getMonthName(new Date())} ${new Date().getDate()}, ${String(new Date().getFullYear()).substring(2)}` });
-        addWholeSalerAccordion(data, { ...orderData, "_id": uuid, "brandsku": `${orderData["sku"]}-${filteredBrand[0]["sku"]}`, "ordered_date": `${getMonthName(new Date())} ${new Date().getDate()}, ${String(new Date().getFullYear()).substring(2)}` }, currentSku);
+        window.wholesalerAccountData.push({...orderData, "_id": uuid, "brandsku": `${orderData["sku"]}-${filteredBrand[0]["sku"]}`, "ordered_date": `${getMonthName( new Date())} ${new Date().getDate()}, ${String(new Date().getFullYear()).substring(2)}`});
+        addWholeSalerAccordion(data, {...orderData, "_id": uuid, "brandsku": `${orderData["sku"]}-${filteredBrand[0]["sku"]}`, "ordered_date": `${getMonthName( new Date())} ${new Date().getDate()}, ${String(new Date().getFullYear()).substring(2)}`}, currentSku);
     } else {
         let orderData = data["available_orders"]["orders"][0];
-        if (requestType === "swap") {
+        if(requestType === "swap") {
             let requestSkuSwap = data["available_orders"]["orders"].filter(ordr => ordr["sku"] === requestSku);
             orderData = requestSkuSwap[0]
         }
-        if (!window.orderCartData.includes(filteredBrand[0]["sku"])) {
+        if(!window.orderCartData.includes(filteredBrand[0]["sku"]) ) {
             window.orderCartData.push(filteredBrand[0]["sku"]);
-            window.wholesalerAccountData.push({ ...orderData, "_id": uuid, "brandsku": `${orderData["sku"]}-${filteredBrand[0]["sku"]}`, "ordered_date": `${getMonthName(new Date())} ${new Date().getDate()}, ${String(new Date().getFullYear()).substring(2)}` });
-            addWholeSalerAccordion(data, { ...orderData, "_id": uuid, "brandsku": `${orderData["sku"]}-${filteredBrand[0]["sku"]}`, "ordered_date": `${getMonthName(new Date())} ${new Date().getDate()}, ${String(new Date().getFullYear()).substring(2)}` }, currentSku);
+            window.wholesalerAccountData.push({...orderData, "_id": uuid, "brandsku": `${orderData["sku"]}-${filteredBrand[0]["sku"]}`, "ordered_date": `${getMonthName( new Date())} ${new Date().getDate()}, ${String(new Date().getFullYear()).substring(2)}`});
+            addWholeSalerAccordion(data, { ...orderData, "_id": uuid, "brandsku": `${orderData["sku"]}-${filteredBrand[0]["sku"]}`, "ordered_date": `${getMonthName( new Date())} ${new Date().getDate()}, ${String(new Date().getFullYear()).substring(2)}` }, currentSku);
         } else {
             let getIds = window.dataStore["new_orders"]["orders"].map(nwo => nwo["_id"]);
-            if (requestType === "from-checkout") {
+            if(requestType === "from-checkout") {
                 let parseData = Object.keys(window.dataStore).length !== 0 ? JSON.parse(JSON.stringify(window.dataStore)) : getParsedData();
                 parseData && parseData?.["new_orders"] && parseData?.["new_orders"]?.["orders"] && parseData?.["new_orders"]?.["orders"].map((ordr, index) => {
-                    if (ordr["brandsku"].includes(filteredBrand[0]["sku"])) {
+                    if(ordr["brandsku"].includes(filteredBrand[0]["sku"])) {
                         addnewOrder(ordr, currentSku);
                     }
                 });
@@ -1068,7 +1117,7 @@ function showBrandLevelDetails(data, currentSku, requestType, requestSku) {
                 let getIds = window.dataStore["new_orders"]["orders"].map(nwo => nwo["_id"])
                 let parseData = Object.keys(window.dataStore).length !== 0 ? JSON.parse(JSON.stringify(window.dataStore)) : getParsedData();
                 parseData && parseData?.["new_orders"] && parseData?.["new_orders"]?.["orders"] && parseData?.["new_orders"]?.["orders"].map((ordr, index) => {
-                    if (ordr["sku"].includes(filteredBrand[0]["sku"])) {
+                    if(ordr["sku"].includes(filteredBrand[0]["sku"])) {
                         addnewOrder(ordr, currentSku);
                     }
                 });
@@ -1098,16 +1147,16 @@ function addWholeSalerAccordionSku(data, orderData, currentSku) {
 }
 
 function addWholeSalerAccordion(data, orderData, currentSku) {
-    /*  data["new_orders"] = {};
-     data["new_orders"]["orders"] = window.wholesalerAccountData; */
-
+   /*  data["new_orders"] = {};
+    data["new_orders"]["orders"] = window.wholesalerAccountData; */
+    
     window.dataStore["new_orders"] = {};
     window.dataStore["new_orders"]["orders"] = window.wholesalerAccountData;
     window.brandArr[currentSku].push(orderData["sku"]);
-    /*  window.wholesalerAccountData && window.wholesalerAccountData.map(whData => {
-         window.brandArr[currentSku].push(whData["sku"]);
-     })
-      */
+   /*  window.wholesalerAccountData && window.wholesalerAccountData.map(whData => {
+        window.brandArr[currentSku].push(whData["sku"]);
+    })
+     */
 
     // localStorage.setItem("data", JSON.stringify(data));
     if (window.wholesalerAccountData.length > 1) {
@@ -1119,7 +1168,7 @@ function addWholeSalerAccordion(data, orderData, currentSku) {
 
 function getPreviousOrderTableData(data, currentSku) {
     let previousTableData = data && data.map((item, index) => {
-        if (item["brand"] === currentSku) {
+        if(item["brand"] === currentSku) {
             return `
                 <tr>
                     <td colspan="5">
@@ -1173,54 +1222,54 @@ function addnewOrder(data, currentSku) {
     const getLocalDataForDate = getParsedData();
     const startDate = new Date();
     const endDate = getLocalDataForDate['last_date'];
-    const minDate = `${getMonthName(new Date(startDate))} ${new Date(startDate).getDate()}, ${String(new Date(startDate).getFullYear()).substring(2)}`;
-    const maxDate = `${getMonthName(new Date(endDate))} ${new Date(endDate).getDate()}, ${String(new Date(endDate).getFullYear()).substring(2)}`;
+    const minDate = `${getMonthName( new Date(startDate))} ${new Date(startDate).getDate()}, ${String(new Date(startDate).getFullYear()).substring(2)}`;
+    const maxDate = `${getMonthName( new Date(endDate))} ${new Date(endDate).getDate()}, ${String(new Date(endDate).getFullYear()).substring(2)}`;
     /* Disable current date selection by default */
-    $(`#tbDate-dpicker-${data["_id"]}`).datepicker({
-        dateFormat: 'M dd, y',
-        minDate: minDate,
+    $(`#tbDate-dpicker-${data["_id"]}`).datepicker({ 
+        dateFormat: 'M dd, y', 
+        minDate: minDate, 
         maxDate: maxDate,
-        onSelect: function (dateText, inst) {
+        onSelect: function(dateText, inst) {
             var date = $(this).val();
             let selectedAccountId = $(this).parent().parent().attr("_id");
             console.log("selectedAccountId -> ", selectedAccountId);
             window.wholesalerAccountData.forEach(wad => {
-                if (wad["_id"] === selectedAccountId) {
+                if(wad["_id"] === selectedAccountId) {
                     wad["ordered_date"] = date;
                 }
             })
             window?.["dataStore"]?.["new_orders"]?.["orders"].forEach(dno => {
-                if (dno["_id"] === selectedAccountId) {
+                if(dno["_id"] === selectedAccountId) {
                     dno["ordered_date"] = date;
                 }
             })
         },
-        beforeShowDay: function (date) {
+        beforeShowDay: function(date){
             if (window.wholesalerAccountData && window.wholesalerAccountData.length > 1) {
                 let accountDatesCollection = [];
                 window?.wholesalerAccountData?.map((whData, index) => {
                     console.log("whdata -> ", whData);
-                    if (whData["sku"] === data["sku"] && whData["brandsku"] === data["brandsku"]) {
-                        if (whData["ordered_date"]) accountDatesCollection.push(whData["ordered_date"]);
+                    if(whData["sku"] === data["sku"] && whData["brandsku"] === data["brandsku"]) {
+                        if(whData["ordered_date"]) accountDatesCollection.push(whData["ordered_date"]);
                     }
                 });
                 let convertedDateFormat = $.datepicker.formatDate('M dd, y', date);
                 console.log("accountDatesCollection --> ", accountDatesCollection);
-                return [accountDatesCollection.indexOf(convertedDateFormat) == -1]
+                return [ accountDatesCollection.indexOf(convertedDateFormat) == -1 ]
             } else {
                 return [true];
             }
         }
     }
     );
-    if (data["ordered_date"]) {
+    if(data["ordered_date"]) {
         $(`#tbDate-dpicker-${data["_id"]}`).datepicker("setDate", data["ordered_date"]);
     }
 
     $(".swapWholesalerAccount").click(function (e) {
         e.stopPropagation();
         e.stopImmediatePropagation();
-
+        
         $(".swap_account_list").empty();
         $(".swap_account_select").removeClass("hide");
         let swapSku = $(this).attr("skudata");
@@ -1283,8 +1332,8 @@ function addnewOrder(data, currentSku) {
 
             let oldSkuDataAccount = window?.["dataStore"]?.["available_orders"]?.["orders"]?.filter(ao => ao["sku"] === oldSkuData);
             let newSkuDataAccount = window?.["dataStore"]?.["available_orders"]?.["orders"]?.filter(ao => ao["sku"] === newSkuData);
-            let currentWholeSalerDataAccount = window?.wholesalerAccountData?.filter(wad => wad["_id"] === currentWholeSalerData);
-
+            let currentWholeSalerDataAccount= window?.wholesalerAccountData?.filter(wad => wad["_id"] === currentWholeSalerData);
+                
             console.log("oldSkuDataAccount -> ", oldSkuDataAccount);
             console.log("newSkuDataAccount -> ", newSkuDataAccount);
             console.log("currentWholeSalerDataAccount -> ", currentWholeSalerDataAccount);
@@ -1304,9 +1353,9 @@ function addnewOrder(data, currentSku) {
                         [window.cartData[pdsku][selectedpd["sku"]]]: Number(selectedpd["units"]) ? Number(selectedpd["units"]): 0
                     }
                 } */
-                if (Number(selectedpd["units"])) {
-                    if (!window.cartData[`${newSkuData}_${uuid}`]) {
-                        window.cartData[`${newSkuData}_${uuid}`] = {};
+                if(Number(selectedpd["units"])) {
+                    if(!window.cartData[`${newSkuData}_${uuid}`]) {
+                        window.cartData[`${newSkuData}_${uuid}`]= {};
                         /* window.cartData = {
                             ...window.cartData,
                             [`${newSkuDataAccount[0]["sku"]}_${uuid}`]: {
@@ -1331,7 +1380,7 @@ function addnewOrder(data, currentSku) {
                             }
                         };
                     }
-
+                    
                 }
                 return selectedpd;
             });
@@ -1341,7 +1390,7 @@ function addnewOrder(data, currentSku) {
             newSkuDataAccount[0]["product_details"] = mappedUnitData;
 
             window.wholesalerAccountData && window.wholesalerAccountData.map((wad, index) => {
-                if (wad["_id"] === currentWholeSalerData) {
+                if(wad["_id"] === currentWholeSalerData) {
                     delete window.cartData[`${currentWholeSalerDataAccount[0]["sku"]}_${currentWholeSalerData}`];
                     window.wholesalerAccountData.splice(index, 1);
                     window.wholesalerAccountData.push(newSkuDataAccount[0]);
@@ -1354,14 +1403,14 @@ function addnewOrder(data, currentSku) {
             });
 
             let getStoredData = getParsedData();
-
+            
             window.dataStore["available_orders"]["orders"] = getStoredData["available_orders"]["orders"];
             window.dataStore["new_orders"]["orders"] = window.wholesalerAccountData;
 
             let selectedBrand = window.dataStore["selected_brand"];
             const filteredBrand = window.dataStore["plan_progress"]["brands"].filter(brand => brand["sku"] === selectedBrand);
             const isBrandSku = filteredBrand[0]["isSku"];
-
+            
             isBrandSku ? showSkuLevelDetailsBrand(window.dataStore, selectedBrand, "swap", newSkuData) : showBrandLevelDetails(window.dataStore, selectedBrand, "swap", newSkuData);
 
             // filterSelectedData[0]["brandsku"] = brandsku;
@@ -1370,25 +1419,25 @@ function addnewOrder(data, currentSku) {
             // let filterPrevSelectedData = window.dataStore && window.dataStore["new_orders"] && window.dataStore["new_orders"]["orders"] && window.dataStore["new_orders"]["orders"].filter(ord => ord["_id"] === currentSwapElementData);
             // console.log("filterSelectedData --> ", filterSelectedData);
             // console.log("filterPrevSelectedData --> ", filterPrevSelectedData);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
             // let skuAcc = [];
             // skuAcc = window.wholesalerAccountData && window.wholesalerAccountData.map((whData, index) => {
             //     return whData["sku"];
             // });
-
+            
             // let brandsku = `${filterSelectedData[0]["sku"]}-${window.dataStore["selected_brand"]}`;
             // console.log("brandsku --> ", brandsku);
 
@@ -1418,7 +1467,7 @@ function addnewOrder(data, currentSku) {
             //                 }
             //             }
             //         }
-
+                    
             //     }
             //     return selectedpd;
             // });
@@ -1436,7 +1485,7 @@ function addnewOrder(data, currentSku) {
             // });
 
             // let getStoredData = getParsedData();
-
+            
             // window.dataStore["available_orders"]["orders"] = getStoredData["available_orders"]["orders"];
             // window.dataStore["new_orders"]["orders"] = window.wholesalerAccountData;
 
@@ -1454,7 +1503,7 @@ function addnewOrder(data, currentSku) {
 
     data["product_details"].map((productData, index) => {
         let uuid = create_UUID();
-        if (productData["brand"] === currentSku) {
+        if(productData["brand"] === currentSku) {
             $("#new_order_body").append(`
                 <tr class="info_row">
                     <td class="info_data" style="vertical-align: middle; padding: 2px 0 0 0;">${productData["name"]}</td>
@@ -1575,35 +1624,35 @@ function addnewOrderBrand(data, currentSku, skulevel) {
     const getLocalDataForDate = getParsedData();
     const startDate = new Date();
     const endDate = getLocalDataForDate['last_date'];
-    const minDate = `${getMonthName(new Date(startDate))} ${new Date(startDate).getDate()}, ${String(new Date(startDate).getFullYear()).substring(2)}`;
-    const maxDate = `${getMonthName(new Date(endDate))} ${new Date(endDate).getDate()}, ${String(new Date(endDate).getFullYear()).substring(2)}`;
+    const minDate = `${getMonthName( new Date(startDate))} ${new Date(startDate).getDate()}, ${String(new Date(startDate).getFullYear()).substring(2)}`;
+    const maxDate = `${getMonthName( new Date(endDate))} ${new Date(endDate).getDate()}, ${String(new Date(endDate).getFullYear()).substring(2)}`;
     /* Disable current date selection by default */
-    $(`#tbDate-dpicker-${data["_id"]}`).datepicker({
-        dateFormat: 'M dd, y',
-        minDate: minDate,
+    $(`#tbDate-dpicker-${data["_id"]}`).datepicker({ 
+        dateFormat: 'M dd, y', 
+        minDate: minDate, 
         maxDate: maxDate,
-        onSelect: function (dateText, inst) {
+        onSelect: function(dateText, inst) {
             var date = $(this).val();
             let selectedAccountId = $(this).parent().parent().attr("_id");
             console.log("selectedAccountId -> ", selectedAccountId);
             window.wholesalerAccountData.forEach(wad => {
-                if (wad["_id"] === selectedAccountId) {
+                if(wad["_id"] === selectedAccountId) {
                     wad["ordered_date"] = date;
                 }
             })
             window?.["dataStore"]?.["new_orders"]?.["orders"].forEach(dno => {
-                if (dno["_id"] === selectedAccountId) {
+                if(dno["_id"] === selectedAccountId) {
                     dno["ordered_date"] = date;
                 }
             })
         },
-        beforeShowDay: function (date) {
+        beforeShowDay: function(date){
             if (window.wholesalerAccountData && window.wholesalerAccountData.length > 1) {
                 let accountDatesCollection = [];
                 window?.wholesalerAccountData?.map((whData, index) => {
                     console.log("whdata -> ", whData);
-                    if (whData["sku"] === data["sku"] && whData["brandsku"] === data["brandsku"]) {
-                        if (whData["ordered_date"]) accountDatesCollection.push(whData["ordered_date"]);
+                    if(whData["sku"] === data["sku"] && whData["brandsku"] === data["brandsku"]) {
+                        if(whData["ordered_date"]) accountDatesCollection.push(whData["ordered_date"]);
                     }
                 });
                 let convertedDateFormat = $.datepicker.formatDate('M dd, y', date);
@@ -1684,8 +1733,8 @@ function addnewOrderBrand(data, currentSku, skulevel) {
 
             let oldSkuDataAccount = window?.["dataStore"]?.["available_orders"]?.["orders"]?.filter(ao => ao["sku"] === oldSkuData);
             let newSkuDataAccount = window?.["dataStore"]?.["available_orders"]?.["orders"]?.filter(ao => ao["sku"] === newSkuData);
-            let currentWholeSalerDataAccount = window?.wholesalerAccountData?.filter(wad => wad["_id"] === currentWholeSalerData);
-
+            let currentWholeSalerDataAccount= window?.wholesalerAccountData?.filter(wad => wad["_id"] === currentWholeSalerData);
+                
             console.log("oldSkuDataAccount -> ", oldSkuDataAccount);
             console.log("newSkuDataAccount -> ", newSkuDataAccount);
             console.log("currentWholeSalerDataAccount -> ", currentWholeSalerDataAccount);
@@ -1770,25 +1819,25 @@ function addnewOrderBrand(data, currentSku, skulevel) {
             // let filterPrevSelectedData = window.dataStore && window.dataStore["new_orders"] && window.dataStore["new_orders"]["orders"] && window.dataStore["new_orders"]["orders"].filter(ord => ord["_id"] === currentSwapElementData);
             // console.log("filterSelectedData --> ", filterSelectedData);
             // console.log("filterPrevSelectedData --> ", filterPrevSelectedData);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
             // let skuAcc = [];
             // skuAcc = window.wholesalerAccountData && window.wholesalerAccountData.map((whData, index) => {
             //     return whData["sku"];
             // });
-
+            
             // let brandsku = `${filterSelectedData[0]["sku"]}-${window.dataStore["selected_brand"]}`;
             // console.log("brandsku --> ", brandsku);
 
@@ -1968,8 +2017,8 @@ function updateCounter(counterInput, type, currentSku, skulevel, brandData, inpu
     } else {
         skuData = $(counterInput).parent().parent().attr("skudata");
     }
-
-    if (skulevel) {
+    
+    if(skulevel) {
         parentSkuData = $(counterInput).parent().parent().attr("parentskudata");
     } else {
         parentSkuData = $(counterInput).parent().parent().attr("parentskudata");
