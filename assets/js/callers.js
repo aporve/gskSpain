@@ -448,6 +448,14 @@ window.addEventListener('message', function (eventData) {
         ToApp("confirm-order-from-cart", data);
     }
 
+    if (parsedEventData.event_code === "clientlist-screen" && parsedEventData.data) {
+        let eventName = parsedEventData.event_code;
+        let data = parsedEventData.data;
+        console.log("eventName---", eventName);
+        console.log('Event Data---', data);
+        ToApp("clientlist-screen", data);
+    }
+
     if (parsedEventData.event_code === "bot-reloaded" && parsedEventData.data) {
         let eventName = parsedEventData.event_code;
         let data = parsedEventData.data;

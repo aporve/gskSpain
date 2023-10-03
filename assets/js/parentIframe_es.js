@@ -369,6 +369,31 @@ window.addEventListener('message', function (eventData) {
 
   }
 
+  if (parsedData?.event_code == 'custom-event' && parsedData?.data?.code == "clientlist-screen") {
+    let source = parsedData.data.data.source;
+    localStorage.setItem("source", source);
+    if (source == 'Mobile') {
+      injectDynamicCssForMobileUI();
+      localStorage.setItem("screen", 'ui');
+      document.getElementById('ymIframe').contentWindow.postMessage(JSON.stringify({
+        event_code: 'clientlist-screen',
+        data: parsedData.data.data
+      }), '*');
+      console.log("clientlist-screen")
+      console.log('Event Data-->>', parsedData.data.data)
+      return;
+    } else {
+      document.getElementById('ymIframe').contentWindow.postMessage(JSON.stringify({
+        event_code: 'clientlist-screen',
+        data: parsedData.data.data
+      }), '*');
+      console.log("clientlist-screen")
+      console.log('Event Data-->>', parsedData.data.data)
+      return;
+    }
+
+  }
+
 
   if (parsedData?.event_code == 'custom-event' && parsedData?.data?.code == "bot-reloaded") {
     console.log("bot-reloaded");
