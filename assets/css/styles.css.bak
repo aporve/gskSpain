@@ -672,7 +672,6 @@ table {
     border: 1px solid transparent;
     border-radius: 2px;
     font-size: 14px;
-    text-align: left;
 }
 
 .info_data.active>input {
@@ -687,8 +686,9 @@ table {
 
 .order_cart .detail .table thead .info_row .info_data:first-child,
 .order_cart .detail .table tbody .info_row .info_data:first-child {
-    padding: 6px 0 6px 0;
+    padding: 8px 0 12px 0;
 }
+
 /* PROGRESS PLAN END */
 
 .choosebrands {
@@ -707,7 +707,7 @@ table {
 .choosebrands .menu_header .label,
 .choosebrands .category_label {
     font-weight: 600;
-    font-size: 18px;
+    font-size: 16px;
     line-height: 26px;
     text-transform: uppercase;
     color: #f36633;
@@ -731,23 +731,14 @@ table {
     height: 30px;
     width: 30px;
     position: relative;
-    /* margin-top: 15px; */
-    margin-top: 0px;
-}
-
-.choosebrands .menu_header .icon.view_checkout {
-    margin-top: 16px;
-}
-
-.choosebrands .menu_header .icon.goToBrandLevel {
-    margin-top: 8px;
+    margin-top: 15px;
 }
 
 .choosebrands .menu_header .icon img {
     transform: scale(1.5);
 }
 
-.choosebrands .menu_header .icon .count_wrapper { 
+.choosebrands .menu_header .icon .count_wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -773,12 +764,7 @@ table {
     line-height: 20px;
     color: #151515;
     padding: 0 16px;
-    margin-top: 2px;
-    white-space: nowrap;
-}
-
-.choosebrands .sub_detail strong {
-    color: #FF7900;
+    margin-top: 10px;
 }
 
 .choosebrands .sub_detail_wrapper {
@@ -792,7 +778,6 @@ table {
 
 .choosebrands .sub_detail_wrapper div:last-child {
     align-self: flex-end;
-    white-space: normal;
 }
 
 .choosebrands .menu_header .sub_detail span {
@@ -805,11 +790,8 @@ table {
     box-shadow: 0px 3px 12px rgba(84, 79, 64, 0.1);
     border-radius: 5px;
     padding: 0 12px;
-    /* margin: 6px 16px; */
-    margin: 6px 16px 0 16px;
+    margin: 12px 16px;
     animation: unset;
-    overflow: hidden;
-    position: relative;
 }
 
 .choosebrands .progress_card.transparent {
@@ -832,6 +814,7 @@ table {
     font-size: 12px;
     color: #959595;
 }
+
 /* Footer End */
 
 .accordion {
@@ -840,16 +823,16 @@ table {
 }
 
 .accordion-item {
-    padding: 8px 0;
+    padding: 12px 0;
     background-color: #fff;
     color: #111;
-    margin: 0.6rem 0 1rem 0;
+    margin: 1rem 0;
     border-radius: 5px;
     box-shadow: 0px 3px 12px rgba(84, 79, 64, 0.1);
 }
 
 .accordion-item.inverted div,
-.accordion-item.inverted input  {
+.accordion-item.inverted input {
     color: #959595;
 }
 
@@ -917,13 +900,13 @@ table {
 
 .accordion-item-body.inverted div {
     background: #959595;
-    color: #fff; 
+    color: #fff;
 }
 
 .accordion-item.inverted .accordion-item-body-content .title {
     font-size: 13px;
     font-weight: 700;
-    padding: 6px 0;
+    padding: 12px 0;
     text-transform: uppercase;
 }
 
@@ -935,7 +918,7 @@ table {
 .accordion-item.inverted .accordion-item-body-content .order_on_date {
     font-size: 14px;
     font-weight: 400;
-    padding: 6px 0 6px 0;
+    padding: 14px 0 12px 0;
 }
 
 .accordion-item-body-content {
@@ -988,7 +971,7 @@ table {
 }
 
 .accordion-item-body.parent .accordion-item-body-content .accordion.associated_accounts:last-child .accordion-item.profile {
-   border-bottom: 0;
+    border-bottom: 0;
 }
 
 .accordion-item-body.parent .accordion-item-body-content .accordion .accordion-item .accordion-item-header.active {
@@ -1075,20 +1058,21 @@ table {
     padding: 4px 0 0 0;
     box-shadow: none;
 }
-.accordian.table .info_row.brandscreen td .progress_card .progress_plan .grouped .progressbar{
+
+.accordian.table .info_row.brandscreen td .progress_card .progress_plan .grouped .progressbar {
     margin-bottom: 0;
 }
 
-.accordian.table .info_row.brandscreen td .progress_card .progress_plan .grouped .progressbar .wrapper_brand_progress:nth-child(1){
+.accordian.table .info_row.brandscreen td .progress_card .progress_plan .grouped .progressbar .wrapper_brand_progress:nth-child(1) {
     width: 5% !important;
 }
 
-.accordian.table .info_row.brandscreen td .progress_card .progress_plan .grouped .progressbar .wrapper_brand_progress:nth-child(2){
+.accordian.table .info_row.brandscreen td .progress_card .progress_plan .grouped .progressbar .wrapper_brand_progress:nth-child(2) {
     /* width: 94% !important; */
     /* padding-left: 20px; */
 }
 
-.accordian.table .info_row.brandscreen td .progress_card .progress_plan .grouped .progressbar .wrapper_brand_progress:nth-child(3){
+.accordian.table .info_row.brandscreen td .progress_card .progress_plan .grouped .progressbar .wrapper_brand_progress:nth-child(3) {
     /* display: none; */
     /* width: 0 !important; */
 }
@@ -1116,15 +1100,15 @@ table {
 }
 
 .accordion-item.inverted .accordian.table tbody tr .title {
-    padding-top: 6px;
+    padding-top: 12px;
 }
 
 .accordian.table tbody tr:first-child .title.paddingTop {
-    padding: 6px 0;
+    padding-top: 12px;
 }
 
 .accordian.table tbody tr .title.paddingTop {
-    padding-top: 6px;
+    padding-top: 12px;
 }
 
 .accordian.table tbody tr .title .arrow {
@@ -1139,7 +1123,7 @@ table {
 }
 
 .accordian.table .info_row .info_data {
-    padding: 0px 0 6px 0;
+    padding: 10px 0 14px 0;
     vertical-align: top;
 }
 
@@ -1193,7 +1177,7 @@ table {
     font-size: 13px;
     line-height: 20px;
     color: #f36633;
-    padding: 4px 2px 4px 0;
+    padding: 12px 4px 12px 0;
     padding-top: 0;
     text-align: left;
     vertical-align: top;
@@ -1232,7 +1216,7 @@ table {
 
 .account_select .account_list .item,
 .swap_account_select .swap_account_list .item,
-.periodrebates .rebates_list  .item {
+.periodrebates .rebates_list .item {
     font-weight: 600;
     font-size: 14px;
     line-height: 20px;
@@ -1255,6 +1239,7 @@ table {
 .periodrebates .rebates_list .item:first-child {
     margin-top: 0;
 }
+
 .account_select .account_list .item:last-child,
 .swap_account_select .swap_account_list .item:last-child,
 .periodrebates .rebates_list .item:last-child {
@@ -1268,25 +1253,23 @@ table {
     justify-content: space-between;
 }
 
-.addProductsAsPerBrand {
-    
-}
-.addProductsAsPerBrand img{
+.addProductsAsPerBrand {}
+
+.addProductsAsPerBrand img {
     height: 18px;
     width: 18px;
 }
-.addProductsAsPerBrand {
 
-}
-.addProductsAsPerBrand {
+.addProductsAsPerBrand {}
 
-}
+.addProductsAsPerBrand {}
 
 .flex {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
+
 .wrapper_brand_progress {
     width: 100%;
 }
@@ -1299,13 +1282,13 @@ table {
 
 .icon_add {
     height: 18px;
-    width: 18px; 
+    width: 18px;
 }
 
 .inverted {
     /* background: #959595 !important; */
     background: #3f3f3f !important;
-    color: #fff !important; 
+    color: #fff !important;
     border-color: #959595 !important;
 }
 
@@ -1365,131 +1348,4 @@ table {
 
 .notification_failed::before {
     background: #f23904 !important;
-}
-/* 
-  .confetti {
-      display: none;
-  }
-  .confetti.left {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-  }
-  .confetti.right {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-  }
-  .confetti.left::before {
-    position: absolute;
-    content: "";
-    width: 4px;
-    height: 7px;
-    animation: 2.5s explode ease-out 3 backwards, 2.5s gravity ease-in 3 backwards;
-  }
-  .confetti.right::before {
-    position: absolute;
-    content: "";
-    width: 4px;
-    height: 7px;
-    animation: 2.5s explode ease-out 3 backwards, 2.5s gravityRight ease-in 3 backwards;
-  }
-  @keyframes explode {
-      from {
-          opacity: 1;
-      }
-    to {
-      box-shadow: 33px 28.6666666667px #244EA2, -186px -173.3333333333px #E21860, -52px -88.3333333333px #69B445, -192px -195.3333333333px #DC4133, -102px -60.3333333333px #FFC709, 101px -110.3333333333px #FFC709, 72px -38.3333333333px #FFC709, -90px -9.3333333333px #DC4133, 168px -31.3333333333px #DC4133, -135px -25.3333333333px #E21860, -4px -198.3333333333px #00B8AD, 37px -71.3333333333px #00B8AD, -46px -106.3333333333px #00B8AD, 18px -1.3333333333px #DC4133, -22px 23.6666666667px #E21860, 158px -77.3333333333px #FFC709, 46px 27.6666666667px #DC4133, -130px -65.3333333333px #00B8AD, -134px 1.6666666667px #DC4133, -22px -17.3333333333px #E21860, -73px -125.3333333333px #00B8AD, -20px -77.3333333333px #244EA2, 61px 24.6666666667px #E21860, 126px -120.3333333333px #E21860, -182px -126.3333333333px #69B445, -92px -37.3333333333px #FFC709, -22px -207.3333333333px #DC4133, -100px 36.6666666667px #244EA2, -10px -85.3333333333px #244EA2, -137px 20.6666666667px #69B445, 179px -12.3333333333px #244EA2, 145px -136.3333333333px #E21860, -161px -37.3333333333px #69B445, -37px -142.3333333333px #00B8AD, 1px -121.3333333333px #FFC709, -178px -112.3333333333px #E21860, -30px -180.3333333333px #FFC709, 6px 28.6666666667px #FFC709, 58px -205.3333333333px #DC4133, 55px -190.3333333333px #FFC709, 175px -96.3333333333px #00B8AD, 168px -70.3333333333px #FFC709, 120px -178.3333333333px #244EA2, 130px 30.6666666667px #FFC709, -164px -150.3333333333px #DC4133, -188px -204.3333333333px #DC4133, 78px 11.6666666667px #69B445, -127px 6.6666666667px #E21860, 121px -148.3333333333px #244EA2, -125px -9.3333333333px #244EA2, 172px -190.3333333333px #DC4133, 35px -156.3333333333px #DC4133, 25px -70.3333333333px #69B445, -22px -158.3333333333px #244EA2, 105px -107.3333333333px #00B8AD, -75px -62.3333333333px #244EA2, 120px -178.3333333333px #DC4133, -153px -180.3333333333px #244EA2, -106px -79.3333333333px #FFC709, 90px -6.3333333333px #00B8AD, 31px 31.6666666667px #FFC709, -153px -0.3333333333px #244EA2, 31px -139.3333333333px #244EA2, -38px -30.3333333333px #E21860, 23px -153.3333333333px #E21860, 67px 34.6666666667px #244EA2, 118px -93.3333333333px #69B445, -100px 5.6666666667px #E21860, -67px -111.3333333333px #DC4133, 135px -80.3333333333px #DC4133, -191px -186.3333333333px #E21860, 29px -120.3333333333px #69B445, 158px -146.3333333333px #E21860, -44px -163.3333333333px #69B445, 147px -45.3333333333px #244EA2, 11px -160.3333333333px #FFC709, 176px -119.3333333333px #00B8AD, 198px -178.3333333333px #FFC709, -175px 34.6666666667px #69B445, 72px -198.3333333333px #00B8AD, -86px 29.6666666667px #DC4133, -110px -159.3333333333px #DC4133, 0px -57.3333333333px #244EA2, 107px -162.3333333333px #69B445, 48px -75.3333333333px #FFC709, -54px -139.3333333333px #FFC709, -85px -163.3333333333px #DC4133, -28px -168.3333333333px #DC4133, 132px -204.3333333333px #244EA2, -51px 10.6666666667px #69B445, -65px -131.3333333333px #69B445, 183px -56.3333333333px #244EA2, -88px -143.3333333333px #244EA2, -121px -90.3333333333px #FFC709, -158px -46.3333333333px #69B445, -189px -52.3333333333px #E21860, 100px -123.3333333333px #E21860, -195px 29.6666666667px #DC4133, -136px -35.3333333333px #DC4133, 109px 41.6666666667px #69B445, 8px 29.6666666667px #FFC709, 199px -109.3333333333px #244EA2, 90px -66.3333333333px #FFC709, 162px -92.3333333333px #FFC709, 59px -28.3333333333px #E21860, -98px -104.3333333333px #DC4133, 192px -169.3333333333px #00B8AD, 87px -166.3333333333px #69B445, 95px -63.3333333333px #244EA2, 155px -109.3333333333px #FFC709, 117px -53.3333333333px #DC4133, -22px -95.3333333333px #FFC709, 101px 22.6666666667px #00B8AD, 163px -207.3333333333px #E21860, -123px 23.6666666667px #FFC709, -96px -98.3333333333px #69B445, 0px -190.3333333333px #244EA2, -131px -6.3333333333px #E21860, 30px -49.3333333333px #69B445, 160px 33.6666666667px #FFC709, 135px -131.3333333333px #DC4133;
-    }
-  }
-  @keyframes gravity {
-      from {
-          opacity: 1;
-      }
-    to {
-      transform: translate(150px, -150px);
-      opacity: 0;
-    }
-  }
-
-  @keyframes gravityRight {
-    from {
-        opacity: 1;
-    }
-  to {
-    transform: translate(-150px, -150px);
-    opacity: 0;
-  }
-}
-
-.reward_snackbar {
-    position: relative;
-    background: #f36633;
-    width: calc(100% - 32px);
-    margin: 0 16px;
-    height: 0;
-    opacity: 0;
-    will-change: height;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-}
-
-@keyframes animateHeight {
-    0%   {height: 0; overflow: hidden;}
-    10%  {height: 0; overflow: hidden;}
-    30% {height: 18px; overflow: auto;}
-    50% {height: 18px; overflow: auto;}
-    70% {height: 18px; overflow: auto;}
-    80% {height: 18px; overflow: auto;}
-    90% {height: 0; overflow: hidden;}
-    100% {height: 0; overflow: hidden;}
-}
-
-.reward_snackbar.active {
-    opacity: 1;
-    overflow: hidden;
-    animation: animateHeight 4.5s ease-out, opacity 1.2s ease-out;
-}
-
-.reward_snackbar::before{
-    content: "Discount Received";
-    display: none;
-    text-align: center;
-    font-size: 10px;
-    font-weight: 600;
-    color: white;
-}
-.reward_snackbar.active::before {
-    display: block;
-}
-
-.brandprogresscontainer {
-    position: relative;
-}
-
-.brandprogresscontainer.skulevel .reward_snackbar {
-    margin-top: -16px;
-}
-.confettibgContainer {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-    height: -webkit-fill-available;
-    width: calc(100% - 32px);
-    overflow: hidden;
-}
-
-
-.confettibgWrapper {
-    position: relative;
-    height: -webkit-fill-available;
-} */
-
-.hide {
-    display: none;
 }

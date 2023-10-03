@@ -20,7 +20,7 @@
     border: 1px solid #959595;
     box-shadow: 0px 3px 12px rgba(84, 79, 64, 0.1);
     border-radius: 5px;
-    padding: 8px 0;
+    padding: 14px 0;
     margin-bottom: 20px;
 }
 
@@ -29,7 +29,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 0px;
+    margin-bottom: 4px;
     padding: 0 16px;
 }
 
@@ -58,7 +58,7 @@
 .order_card .title .name,
 .progress_plan .title .name {
     font-weight: 700;
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .order_card .title .arrow img {
@@ -87,7 +87,7 @@
 }
 
 .order_card .info.outer {
-    padding: 0 16px;
+    padding: 0 20px;
 }
 
 .order_card .info.outer .success {
@@ -107,19 +107,19 @@
 /* Order Card End */
 
 .date-picker-value.date_order {
-    margin-bottom: 6px;
+    margin-bottom: 12px;
 }
 
 .date-picker-value.date_order + .flex.title {
     font-size: 13px;
     line-height: 20px;
     color: #151515;
-    margin-bottom: 6px;
+    margin-bottom: 12px;
 }
 
 .calendar-picker {
     justify-content: unset;
-    margin-top: 2px;
+    margin-top: 12px;
     position: relative;
     display: inline-block;
 }
@@ -127,8 +127,9 @@
 .calendar-picker .picker {
     height: 15px;
     width: 20px;
+
     position: absolute;
-    left: -3px;
+    left: 0;
     top: 0;
     bottom: 0;
     right: 0;
@@ -144,7 +145,7 @@
 .calendar-picker input {
     width: 6.5rem;
     /* margin: 0 0.25rem 0 1.5rem; */
-    padding: 3px 0.25rem 3px 1.5rem;
+    padding: 6px 0.25rem 6px 1.5rem;
     cursor: pointer;
     z-index: 2;
     position: relative;
@@ -169,7 +170,7 @@
 }
 
 .title.backbtn {
-    margin-bottom: 4px;
+    margin-bottom: 22px;
 }
 
 .title.backbtn + .card_click .flex .order_status:nth-child(2) {
@@ -215,7 +216,7 @@
 
 .title.backbtn + .card_click + .order_cart.history > .title {
     border-top: 1px solid #E6E6E6;
-    padding-top: 6px;
+    padding-top: 12px;
     padding-left: 0;
     width: calc(100% - 32px);
     margin-left: auto;

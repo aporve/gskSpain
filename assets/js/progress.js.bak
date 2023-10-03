@@ -1,17 +1,3 @@
-function loadConfetti() {
-    document.getElementsByClassName("confetti") && document.getElementsByClassName("confetti").length ? document.getElementsByClassName("confetti")[0].style.display = "block" : "";
-    document.getElementsByClassName("confetti") && document.getElementsByClassName("confetti").length ? document.getElementsByClassName("confetti")[1].style.display = "block" : "";
-    document.getElementsByClassName("reward_snackbar") && document.getElementsByClassName("confetti").length ? document.getElementsByClassName("reward_snackbar")[0].classList.add("active") : "";
-    window[`rewaredTimer`] = setTimeout(() => {
-        // console.log("timer ", window[`rewaredTimer`])
-        if(window[`rewaredTimer`]) {
-            document.getElementsByClassName("confetti") && document.getElementsByClassName("confetti").length ? document.getElementsByClassName("confetti")[0].style.display = "none" : "";
-            document.getElementsByClassName("confetti") && document.getElementsByClassName("confetti").length ? document.getElementsByClassName("confetti")[1].style.display = "none" : "";
-            document.getElementsByClassName("reward_snackbar") && document.getElementsByClassName("confetti").length ? document.getElementsByClassName("reward_snackbar")[0].classList.remove("active") : "";
-        }
-        clearInterval(window[`rewaredTimer`]);
-    }, 5000);
-}
 
 function loadPlanProgress(data, basicProgress, hideSelectedProgress, initial) {
     let localStoredData = JSON.parse(localStorage.getItem("data"));
@@ -41,17 +27,14 @@ function loadProgressCards(data, detailed, hideAdd) {
         return `
             <div class="progress_card ${detailed ? "transparent" : ""}">
                 <div class="progress_plan">
-                    <!-- <div class="confetti left"></div> -->
                     <div class="grouped">
                         ${getProductsProgress(item, detailed, hideAdd, false, "#3f3f3f")}
                         <div class="quantity_inc">
                             <i class="fa fa-plus-circle" aria-hidden="true"></i>
                         </div>
                     </div>
-                    <!-- <div class="confetti right"></div> -->
                 </div>
             </div>
-            <!-- <div class="reward_snackbar"></div> -->
         `;
     })
     return progresscards.join("");
@@ -191,7 +174,6 @@ function getProductsProgress(item, detailed, hideAdd, basicProgress, colorscheme
     let backgroundProgressPerc = (backgroundProgressWidth / Number(item["max_limit"])) * 100;
 
     let isLabelReached = false;
-    let shouldCelebrate = false;
     let addBtn = `
         ${basicProgress ?
             ""
@@ -238,42 +220,16 @@ function getProductsProgress(item, detailed, hideAdd, basicProgress, colorscheme
             }
             if ((Number(item["purchased"] || 0) + Number(item["selected"])) < range["label"]) {
                 isLabelReached = true;
-                console.log(`inside-log-${index} -> `, isLabelReached);
             } else {
                 isLabelReached = false;
-                console.log(`inside-log-${index} -> `, isLabelReached);
             }
-
-            if((Number(item["purchased"] || 0) + Number(item["selected"])) < range["label"]-1) {
-                shouldCelebrate = true;
-            } else {
-                shouldCelebrate = false;
-            }
-
-            if(!isLabelReached && localStorage.getItem(`block${index}`) == "reached") {
-                if(!window[`count-block-${index}`]) {
-                    loadConfetti();
-                }
-                window[`count-block-${index}`] = 1;
-            } else {
-                window[`count-block-${index}`] = 0;
-            }
-            shouldCelebrate ? localStorage.setItem(`block${index}`, `unreached`) : localStorage.setItem(`block${index}`, `reached`);
             return `<div class="sub-block ${isLabelReached ? "withmarkings" : "withoutmarkings"}" style="width: ${backgroundProgressPerc}%;"></div>`;
         }
         if ((Number(item["purchased"] || 0) + Number(item["selected"])) < range["label"]) {
             isLabelReached = true;
-            console.log(`log-${index} -> `, isLabelReached);
         } else {
             isLabelReached = false;
-            console.log(`log-${index} -> `, isLabelReached);
         }
-        if((Number(item["purchased"] || 0) + Number(item["selected"])) < range["label"] - 1) {
-            shouldCelebrate = true;
-        } else {
-            shouldCelebrate = false;
-        }
-
         if (index === discount_range.length - 1) {
             let diff = Number(discount_range[index]["label"]) - Number(discount_range[index - 1]["label"]);
             let blockRatio = backgroundProgressWidth / diff;
@@ -298,15 +254,6 @@ function getProductsProgress(item, detailed, hideAdd, basicProgress, colorscheme
                     }
                 }
             }
-            if(!isLabelReached && localStorage.getItem(`block${index}`) == "reached") {
-                if(!window[`count-block-${index}`]) {
-                    loadConfetti();
-                }
-                window[`count-block-${index}`] = 1;
-            } else {
-                window[`count-block-${index}`] = 0;
-            }
-            shouldCelebrate ? localStorage.setItem(`block${index}`, `unreached`) : localStorage.setItem(`block${index}`, `reached`);
             return `<div class="sub-block ${isLabelReached ? "withmarkings" : "withoutmarkings"}" style="width: ${backgroundProgressPerc}%;"></div>`;
         }
         let diff = Number(discount_range[index]["label"]) - Number(discount_range[index - 1]["label"]);
@@ -330,15 +277,6 @@ function getProductsProgress(item, detailed, hideAdd, basicProgress, colorscheme
                 }
             }
         }
-        if(!isLabelReached && localStorage.getItem(`block${index}`) == "reached") {
-            if(!window[`count-block-${index}`]) {
-                loadConfetti();
-            }
-            window[`count-block-${index}`] = 1;
-        } else {
-            window[`count-block-${index}`] = 0;
-        }
-        shouldCelebrate ? localStorage.setItem(`block${index}`, `unreached`) : localStorage.setItem(`block${index}`, `reached`);
         return `<div class="sub-block ${isLabelReached ? "withmarkings" : "withoutmarkings"}" style="width: ${backgroundProgressPerc}%;"></div>`;
     });
 
@@ -396,7 +334,7 @@ function getSelectedProgress(item, progressPercentSelected, colorscheme, hideSel
     console.log("progressValue -> ", progressValue);
     if (progressValue) {
         return `
-            <div class="progressbar_ratio" style="width:${Math.abs(progressPercentSelected)}%; background: ${colorscheme} !important; border-top-right-radius: ${Number(progressPercentSelected) >= 100 ? '6px': '10px'}; border-bottom-right-radius: ${Number(progressPercentSelected) >= 100 ? '6px': '10px'};">
+            <div class="progressbar_ratio" style="width:${Math.abs(progressPercentSelected)}%; background: ${colorscheme} !important; border-top-right-radius: ${Number(progressPercentSelected) >= 100 ? '6px' : '10px'}; border-bottom-right-radius: ${Number(progressPercentSelected) >= 100 ? '6px' : '10px'};">
                 <div class="ratio_wrapper">
                     <div class="ratio">${!hideSelectedProgress ? "+" : ""} ${parseInt(item["max_limit"])}</div>
                 </div>
@@ -405,7 +343,7 @@ function getSelectedProgress(item, progressPercentSelected, colorscheme, hideSel
     }
     if (progressPercentSelected) {
         return `
-            <div class="progressbar_ratio" style="width:${Math.abs(progressPercentSelected)}%; background: ${colorscheme} !important; border-top-right-radius: ${Number(progressPercentSelected) >= 100 ? '6px': '10px'}; border-bottom-right-radius: ${Number(progressPercentSelected) >= 100 ? '6px': '10px'};">
+            <div class="progressbar_ratio" style="width:${Math.abs(progressPercentSelected)}%; background: ${colorscheme} !important; border-top-right-radius: ${Number(progressPercentSelected) >= 100 ? '6px' : '10px'}; border-bottom-right-radius: ${Number(progressPercentSelected) >= 100 ? '6px' : '10px'};">
                 <div class="ratio_wrapper">
                     <div class="ratio">${!hideSelectedProgress ? "+" : ""} ${parseInt(item["selected"])}</div>
                 </div>

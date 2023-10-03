@@ -1,13 +1,5 @@
 function CallScreen(caseNum) {
     switch (String(caseNum)) {
-        case "0": 
-            ToApp("legal-copyright", {
-                "tncHeading": "Legal Terms & Conditions",
-                "tnc": `At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis
-                praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint
-                occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia.`,
-            });
-            break;
         case "1":
             ToApp("user-login", {
                 isLoggedIn: true,
@@ -1292,64 +1284,6 @@ function CallScreen(caseNum) {
             ToApp("userwelcome-screen", {
                 "start_date": "2022-09-09",
                 "last_date": "2023-12-31",
-                "locale": {
-                    "labels": {
-                        "title": "Plan Progress",
-                        "lastOrder": "Last Order",
-                        "orderHistory": "Order History",
-                        "startDate": "Start Date",
-                        "endDate": "End Date",
-                        "start": "Start",
-                        "end": "End",
-                        "estPrice": "Est. Price",
-                        "units": "Units",
-                        "freeGoods": "Free Goods",
-                        "payTerm": "Pay Term",
-                        "pickDate": "Pick Date",
-                        "offInvoice": "Off Invoice",
-                        "onInvoice": "On Invoice",
-                        "offInvoiceDiscount": "Off Invoice Discount",
-                        "onInvoiceDiscount": "On Invoice Discount",
-                        "discAbbr": "Disc",
-                        "discount": "Discount",
-                        "value": "Value",
-                        "additionalDiscount": "Additional Discount",
-                        "orderDetails": "Order Details",
-                        "products": "PRODUCTS",
-                        "rebates": "Period Eligible / Rebates",
-                        "orderNo": "Order No",
-                        "status": "Status",
-                        "orderDate": "Order Date",
-                        "orderedOn": "Ordered On",
-                        "statusDate": "Status Date",
-                        "periodTotal": "Period Total",
-                        "deliveryOn": "Delivery On",
-                        "yes": "Yes",
-                        "no": "No",
-                        "logOutPopupTitle": "Are you sure you want to log-off?",
-                        "downloadOrderHistory": "Download Order History",
-                        "chooseBrands": "Choose Brands",
-                    },
-                    "buttons": {
-                        "back": "Back",
-                        "cancel": "Cancel",
-                        "confirm": "Confirm",
-                        "continue": "Continue",
-                        "placeNewOrder": "Place New Order",
-                        "logOut": "Logout",
-                        "chooseBrands": "Choose Brands",
-                        "checkout": "Checkout",
-                        "addAnotherAccount": "Add Another Account or Deferral Date",
-                        "accept": "Accept the terms",
-                        "decline": "Decline",
-                    },
-                    "snackbars": {
-                        "exceedMaxLimit": "Value exceeding the max limit.",
-                        "selectDate": "Please select date!!!",
-                        "maxReached": "Maximum reached!!!",
-                        "accountSelected": "All Acc Selected!!!",
-                    }
-                },
                 "download_url": "https://stats.govt.nz/assets/Uploads/Annual-enterprise-survey/Annual-enterprise-survey-2021-financial-year-provisional/Download-data/annual-enterprise-survey-2021-financial-year-provisional-csv.csv",
                 "totalcheckout": "",
                 "plan_progress": {

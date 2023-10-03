@@ -61,7 +61,7 @@
     color: #151515;
 }
 
-.legal_tnc {
+.content__box .splash_screen .legal_tnc {
     height: 25%;
     width: 100%;
     font-size: 12px;
@@ -70,24 +70,24 @@
     padding: 30px;
 }
 
-.legal_tnc .legal_tnc_title {
+.content__box .splash_screen .legal_tnc .legal_tnc_title {
     font-weight: 700;
     line-height: 18px;
     margin-bottom: 10px;
 }
 
-.legal_tnc .legal_tnc_body {
+.content__box .splash_screen .legal_tnc .legal_tnc_body {
     font-weight: 400;
     line-height: 18px;
     margin-bottom: 10px;
 }
 
-.legal_tnc .legal_tnc_body a {
+.content__box .splash_screen .legal_tnc .legal_tnc_body a {
     color: #0000EE;
     text-decoration: underline;
 }
 
-.legal_tnc .readmore {
+.content__box .splash_screen .legal_tnc .readmore {
     color: #f26633;
     font-weight: 700;
 }
