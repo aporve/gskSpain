@@ -77,7 +77,7 @@ function showHeader(data) {
         </div>
     `);
 
-    $(".svg_icon_wrapper.help").click(function(e) {
+    $(".svg_icon_wrapper.help").click(function (e) {
         e.stopPropagation();
         e.stopImmediatePropagation();
         // let parsedData = JSON.parse(localStorage.getItem("data"));
@@ -85,25 +85,25 @@ function showHeader(data) {
         ToBot("help", {})
     });
 
-    $(".svg_icon_wrapper.clientListIcon").click(function(e) {
+    $(".svg_icon_wrapper.clientListIcon").click(function (e) {
         e.stopPropagation();
         e.stopImmediatePropagation();
-        CallScreen(5);
+        //CallScreen(5);
         ToBot('get-client-list', {})
     });
 
-    $(".profile_section").click(function(e) {
+    $(".profile_section").click(function (e) {
         e.stopPropagation();
         e.stopImmediatePropagation();
         loadProfileOptions();
     });
 
-    $(document).on("click", ".order_card",function(e) {
+    $(document).on("click", ".order_card", function (e) {
         e.stopPropagation();
         e.stopImmediatePropagation();
     });
 
-    $(document).on("click",function(e) {
+    $(document).on("click", function (e) {
         e.stopPropagation();
         e.stopImmediatePropagation();
         $("#profile_setting_card").removeClass("active");
@@ -174,12 +174,12 @@ function saveParsedData(data) {
 }
 function calculateSumAmount(data) {
     let sum = 0;
-    
+
     let sumValues = obj => Object.values(obj).reduce((a, b) => {
         return Number(a) + Number(b);
     });
-    
-    
+
+
 
     for (let key in data) {
         sum = sum + Number(sumValues(data[key]));
@@ -188,28 +188,28 @@ function calculateSumAmount(data) {
 }
 
 function orderCalculate() {
-    
+
 }
 
 function getMonthName(data) {
     const monthNumber = new Date(data).getMonth() + 1;
     if (isNaN(monthNumber)) {
-         console.error('Invalid month name.');
+        console.error('Invalid month name.');
     }
-  
+
     const months = {
-        '1' : 'Jan',
-        '2' : 'Feb',
-        '3' : 'Mar',
-        '4' : 'Apr',
-        '5' : 'May',
-        '6' : 'Jun',
-        '7' : 'Jul',
-        '8' : 'Aug',
-        '9' : 'Sep',
-        '10' : 'Oct',
-        '11' : 'Nov',
-        '12' : 'Dec',
+        '1': 'Jan',
+        '2': 'Feb',
+        '3': 'Mar',
+        '4': 'Apr',
+        '5': 'May',
+        '6': 'Jun',
+        '7': 'Jul',
+        '8': 'Aug',
+        '9': 'Sep',
+        '10': 'Oct',
+        '11': 'Nov',
+        '12': 'Dec',
     }
 
     return months[monthNumber];
@@ -218,7 +218,7 @@ function getMonthName(data) {
 function addInputListener(inputElement) {
     console.log("pppp ", $(`.${inputElement}`));
     window[inputElement] = $(`.${inputElement}`);
-    
+
     window[inputElement].blur(function () {
         setTimeout(() => {
             console.log("blurred --> ", $(this).val());
@@ -245,19 +245,19 @@ function addInputListener(inputElement) {
                 showSnackbar(true, locale["snackbars"]["selectDate"]);
                 return;
             } */
-           $(this).blur();
+            $(this).blur();
         }
     });
 }
 
 // function addInputListener(inputElement) {
 //     window[inputElement] = $(`.${inputElement}`);
-    
+
 //     window[inputElement].blur(function () {
 //         setTimeout(() => {
 //             console.log("this blur --> ", this);
 //             console.log("blurred --> ", $(this).val());
-            
+
 //             $(this).val(parseInt($(this).val()) - 1);
 //             $(this).change();
 //             let currentElementData = $(this).attr("skudata");
@@ -278,39 +278,39 @@ function addInputListener(inputElement) {
 // }
 
 
-function getJoinedCheckout (data) {
+function getJoinedCheckout(data) {
     function groupBy(objectArray, property) {
         return objectArray.reduce((acc, obj) => {
             const key = obj[property];
             const curGroup = acc[key] ?? [];
-    
+
             return { ...acc, [key]: [...curGroup, obj] };
         }, {});
     }
-    
+
     let updatedData = data["new_orders"]["orders"].map(order => {
         let parsedProductDetails = order["product_details"].filter((product, index) => {
             product["_id"] = order["_id"];
-            if(product["quantity"] && Number(product["quantity"])) {
+            if (product["quantity"] && Number(product["quantity"])) {
                 return product;
             }
         });
         order["product_details"] = parsedProductDetails;
         return order;
     });
-    
+
     let groupByOrderedDate = groupBy(updatedData, "ordered_date");
-    
+
     let groupBySku = [];
     let finalCartData = [];
     for (const key in groupByOrderedDate) {
         groupBySku.push(groupBy(groupByOrderedDate[key], "sku"));
     }
-    
+
     function combine(objectArray, key) {
         return objectArray.reduce((accumulator, currentValue) => [...accumulator, ...currentValue[key]], []);
     }
-     
+
     groupBySku.map(nr => {
         for (const key in nr) {
             let updatedDetails = combine(nr[key], "product_details");
@@ -321,7 +321,7 @@ function getJoinedCheckout (data) {
         }
         return nr;
     });
-    
+
     groupBySku.map(nr => {
         for (const key in nr) {
             finalCartData.push(nr[key])
