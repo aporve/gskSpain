@@ -960,6 +960,19 @@ table {
     color: #151515;
 }
 
+.accordion-item-body-content .block.delete {
+    margin: 0;
+    text-align: right;
+}
+
+.accordion-item-body-content .block.delete .info {
+    display: inline-block;
+    font-size: 13px;
+    line-height: 22px;
+    color: #e71c24;
+    cursor: pointer;
+}
+
 .accordion-item-body-content .block .info {
     font-size: 12px;
     line-height: 22px;

@@ -88,7 +88,7 @@ function showHeader(data) {
     $(".svg_icon_wrapper.clientListIcon").click(function(e) {
         e.stopPropagation();
         e.stopImmediatePropagation();
-        CallScreen(5);
+        // CallScreen(5);
         ToBot('get-client-list', {})
     });
 

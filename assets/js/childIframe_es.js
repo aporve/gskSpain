@@ -397,4 +397,11 @@ window.addEventListener('message', function (eventData) {
     }), '*');
   }
 
+  if (parsedEventData.event_code === "delete-user") {
+    parent.postMessage(JSON.stringify({
+      event_code: 'delete-user',
+      data: parsedEventData.data
+    }), '*');
+  }
+
 });

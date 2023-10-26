@@ -999,19 +999,43 @@ window.addEventListener('message', function (eventData) {
   }
 
   if (parsedData?.event_code == 'get-client-list') {
-    console.log("get-client-list");
-    let data = localStorage.getItem("updated-data")
-
-    if (data) {
-      console.log("\n\n\n <---  Send data to Bot ---> \n\n\n", parsedData);
-      window.frames.ymIframe.chat.send({
-        event: {
-          code: "get-client-list",
-          data: "data"
-        }
-      }, true);
-      return;
-    }
+    console.log('Client Select')
+    console.log("\n\n\n <---  get-client-list event in parent iframe ---> \n\n\n", parsedData);
+    window.frames.ymIframe.chat.send({
+      event: {
+        code: "get-client-list",
+        data: parsedData
+      }
+    }, true);
+    return;
   }
+
+  if (parsedData?.event_code == 'delete-user') {
+    console.log('Client Select')
+    console.log("\n\n\n <---  delete-user event in parent iframe ---> \n\n\n", parsedData);
+    window.frames.ymIframe.chat.send({
+      event: {
+        code: "delete-user",
+        data: parsedData
+      }
+    }, true);
+    return;
+  }
+
+  // if (parsedData?.event_code == 'get-client-list') {
+  //   console.log("get-client-list");
+  //   let data = localStorage.getItem("updated-data")
+
+  //   if (data) {
+  //     console.log("\n\n\n <---  Send data to Bot ---> \n\n\n", parsedData);
+  //     window.frames.ymIframe.chat.send({
+  //       event: {
+  //         code: "get-client-list",
+  //         data: "data"
+  //       }
+  //     }, true);
+  //     return;
+  //   }
+  // }
 
 }, false);

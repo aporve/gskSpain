@@ -240,6 +240,12 @@ function ToBot(eventName, data) {
                 data: data
             }), '*');
             break;
+        case "delete-user":
+            window.parent.postMessage(JSON.stringify({
+                event_code: eventName,
+                data: data
+            }), '*');
+            break;
         default:
             break;
     }

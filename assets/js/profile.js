@@ -82,6 +82,9 @@ function loadUserProfile(data) {
                         <div class="label">${locale["labels"]["email"]}</div>
                         <div class="info">${profile_details["email"] ? profile_details["email"] : '-'}</div>
                     </div>
+                    <div class="block delete" id="deleteUser">
+                        <div class="info">Delete User</div>
+                    </div>
                 `);
                 ToBot("profile-details", {});
             }
@@ -229,6 +232,12 @@ function loadUserProfile(data) {
             }
             scrollHeightAccordion = accordionItemBody.prop('scrollHeight') + "px";
             accordionItemBody.css("maxHeight", scrollHeightAccordion);
+            $("#deleteUser").click(function (e) {
+                e.stopPropagation();
+                e.stopImmediatePropagation();
+                removeHeader();
+                ToBot("delete-user", {});
+            });
         }
         else {
             $(this).removeClass("active");
