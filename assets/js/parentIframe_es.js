@@ -147,26 +147,26 @@ window.addEventListener('message', function (eventData) {
     let source = parsedData.data.data.source;
     localStorage.setItem("source", source);
     if (source == 'Mobile') {
-        injectDynamicCssForMobileBot();
-        localStorage.setItem("screen", 'bot');
-        document.getElementById('ymIframe').contentWindow.postMessage(JSON.stringify({
-            event_code: 'legal-copyright',
-            data: parsedData.data.data
-        }), '*');
-        console.log("legal-copyright")
-        console.log('Event Data-->>', parsedData.data.data)
-        return;
+      injectDynamicCssForMobileBot();
+      localStorage.setItem("screen", 'bot');
+      document.getElementById('ymIframe').contentWindow.postMessage(JSON.stringify({
+        event_code: 'legal-copyright',
+        data: parsedData.data.data
+      }), '*');
+      console.log("legal-copyright")
+      console.log('Event Data-->>', parsedData.data.data)
+      return;
     } else {
-        document.getElementById('ymIframe').contentWindow.postMessage(JSON.stringify({
-            event_code: 'legal-copyright',
-            data: parsedData.data.data
-        }), '*');
-        console.log("legal-copyright")
-        console.log('Event Data-->>', parsedData.data.data)
-        return;
+      document.getElementById('ymIframe').contentWindow.postMessage(JSON.stringify({
+        event_code: 'legal-copyright',
+        data: parsedData.data.data
+      }), '*');
+      console.log("legal-copyright")
+      console.log('Event Data-->>', parsedData.data.data)
+      return;
     }
 
-}
+  }
 
   if (parsedData?.event_code == 'custom-event' && parsedData?.data?.code == "userwelcome-screen") { //bot ui
     console.log('Source-->>', parsedData.data.data.source);
