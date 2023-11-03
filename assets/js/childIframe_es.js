@@ -18,7 +18,7 @@
         <div class="overflow-container-header">
             <ul class="header-wrapper">
               <div style="width: 100%; height:100%">
-                <img src="https://cdn.yellowmessenger.com/7EAbPihYqpwv1678692649814.jpg" alt="GSK Image" style="width: 100%; height:100%">
+                <img src="https://cdn.yellowmessenger.com/3y1u5AriN5iS1698979028445.jpg" alt="GSK Image" style="width: 100%; height:100%">
               </div>
             </ul>
         </div>
@@ -85,14 +85,14 @@ window.addEventListener('message', function (eventData) {
 
   if (parsedEventData.event_code === "legal-copyright" && parsedEventData.data) {
     document.querySelector("iframe").contentWindow.postMessage(JSON.stringify({
-        event_code: 'legal-copyright',                                                // added new event name
-        data: parsedEventData.data
+      event_code: 'legal-copyright',                                                // added new event name
+      data: parsedEventData.data
     }), '*');
     let eventName = parsedEventData.event_code;
     let data = parsedEventData.data;
     console.log("eventName---", eventName);
     console.log('Event Data---', data);
-}
+  }
 
   if (parsedEventData.event_code === "userwelcome-screen" && parsedEventData.data) {
     // remove_blur()
